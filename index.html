@@ -43,6 +43,7 @@ Get rid of add to calendar section and put add to calendar button in each itiner
     html {
       scroll-snap-type: y mandatory;
       scroll-behavior: smooth;
+      height: 100%;
     }
 
     body {
@@ -50,6 +51,9 @@ Get rid of add to calendar section and put add to calendar button in each itiner
       line-height: 1.6;
       overflow-x: hidden;
       background-color: #E5E1D9;
+      margin: 0;
+      padding: 0;
+      height: 100%;
     }
 
     #starshine {
@@ -125,10 +129,13 @@ Get rid of add to calendar section and put add to calendar button in each itiner
     /* Combined Hero and Animated Text Section */
     .hero-section {
       height: 100vh;
+      min-height: 100vh;
+      max-height: 100vh;
       display: flex;
       position: relative;
       overflow: hidden;
       scroll-snap-align: start;
+      scroll-snap-stop: always;
     }
 
     /* Left side - Couple's Image */
@@ -244,12 +251,16 @@ Get rid of add to calendar section and put add to calendar button in each itiner
     /* Section 2: Event Details */
     .details-section {
       height: 100vh;
+      min-height: 100vh;
+      max-height: 100vh;
       background: #E5E1D9;
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
       scroll-snap-align: start;
+      scroll-snap-stop: always;
+      overflow: hidden;
     }
 
     /* Events - Full Width */
@@ -257,29 +268,34 @@ Get rid of add to calendar section and put add to calendar button in each itiner
       flex: 1;
       width: 100%;
       max-width: 1200px;
+      height: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 2rem 2rem;
-      gap: 2rem;
+      padding: 1rem 2rem;
+      gap: 1rem;
+      overflow-y: auto;
+      box-sizing: border-box;
     }
 
     .location-heading {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-size: clamp(2rem, 4vw, 3rem);
       font-weight: 700;
       color: #52474275;
       text-align: center;
-      margin-bottom: 1rem;
+      margin-bottom: 0.5rem;
       letter-spacing: 2px;
       text-transform: uppercase;
+      flex-shrink: 0;
     }
 
     .events-container {
       display: flex;
       flex-direction: row;
-      gap: 2rem;
+      gap: 1rem;
       width: 100%;
+      flex-shrink: 0;
     }
 
     .event-item {
@@ -287,14 +303,15 @@ Get rid of add to calendar section and put add to calendar button in each itiner
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 2rem;
+      padding: 1.5rem;
       margin-bottom: 0;
       background: #F5EDDC;
       border-radius: 20px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
       position: relative;
-      height: 350px;
+      height: 280px;
       text-align: center;
+      flex-shrink: 0;
     }
 
     .event-item:last-child {
@@ -381,8 +398,9 @@ Get rid of add to calendar section and put add to calendar button in each itiner
     @media (max-width: 768px) {
       .hero-section {
         flex-direction: column;
-        height: auto;
+        height: 100vh;
         min-height: 100vh;
+        max-height: 100vh;
       }
 
       .image-side,
@@ -393,13 +411,14 @@ Get rid of add to calendar section and put add to calendar button in each itiner
 
       .image-side {
         height: 50vh;
-        min-height: 300px;
+        min-height: 50vh;
+        max-height: 50vh;
       }
 
-      .image-side {
-        width: 100%;
-        height: 100%;
-        margin-bottom: 0;
+      .text-side {
+        height: 50vh;
+        min-height: 50vh;
+        max-height: 50vh;
       }
 
       .hero-overlay h1 {
@@ -413,7 +432,9 @@ Get rid of add to calendar section and put add to calendar button in each itiner
 
       .details-section {
         flex-direction: column;
-        min-height: auto;
+        height: 100vh;
+        min-height: 100vh;
+        max-height: 100vh;
       }
 
       .events-side {
@@ -459,13 +480,15 @@ Get rid of add to calendar section and put add to calendar button in each itiner
 
     @media (max-width: 480px) {
       .image-side {
-        height: 40vh;
-        min-height: 250px;
+        height: 50vh;
+        min-height: 50vh;
+        max-height: 50vh;
       }
 
-      .image-side {
-        width: 100%;
-        height: 100%;
+      .text-side {
+        height: 50vh;
+        min-height: 50vh;
+        max-height: 50vh;
       }
 
       .hero-overlay h1 {
@@ -485,16 +508,17 @@ Get rid of add to calendar section and put add to calendar button in each itiner
     .video-container {
       width: 100%;
       max-width: 1200px;
-      margin-top: 1.5rem;
+      margin-top: 1rem;
       border-radius: 20px;
       overflow: hidden;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      flex-shrink: 0;
     }
 
     .video-container video {
       width: 100%;
       height: auto;
-      max-height: 400px;
+      max-height: 200px;
       object-fit: cover;
       display: block;
       pointer-events: none;
@@ -503,10 +527,11 @@ Get rid of add to calendar section and put add to calendar button in each itiner
 
     /* Calendar Button */
     .calendar-button-wrapper {
-      margin-top: 1.5rem;
+      margin-top: 1rem;
       display: flex;
       justify-content: center;
       width: 100%;
+      flex-shrink: 0;
     }
 
     .add-calendar-btn {
