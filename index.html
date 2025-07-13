@@ -41,7 +41,6 @@ Get rid of add to calendar section and put add to calendar button in each itiner
     }
 
     html {
-      scroll-snap-type: y mandatory;
       scroll-behavior: smooth;
       height: 100%;
     }
@@ -134,8 +133,6 @@ Get rid of add to calendar section and put add to calendar button in each itiner
       display: flex;
       position: relative;
       overflow: hidden;
-      scroll-snap-align: start;
-      scroll-snap-stop: always;
     }
 
     /* Left side - Couple's Image */
@@ -252,15 +249,11 @@ Get rid of add to calendar section and put add to calendar button in each itiner
     .details-section {
       height: 100vh;
       min-height: 100vh;
-      max-height: 100vh;
       background: #E5E1D9;
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
-      scroll-snap-align: start;
-      scroll-snap-stop: always;
-      overflow: hidden;
     }
 
     /* Events - Full Width */
@@ -274,7 +267,6 @@ Get rid of add to calendar section and put add to calendar button in each itiner
       align-items: center;
       padding: 3rem 2rem 1rem 2rem;
       gap: 1rem;
-      overflow-y: auto;
       box-sizing: border-box;
     }
 
@@ -432,9 +424,9 @@ Get rid of add to calendar section and put add to calendar button in each itiner
 
       .details-section {
         flex-direction: column;
-        height: 100vh;
+        height: auto;
         min-height: 100vh;
-        max-height: 100vh;
+        max-height: none;
       }
 
       .events-side {
@@ -442,6 +434,7 @@ Get rid of add to calendar section and put add to calendar button in each itiner
         padding: 1rem 1rem;
         flex-direction: column;
         gap: 1rem;
+        margin-top: 0.5rem;
       }
 
       .location-heading {
@@ -509,6 +502,17 @@ Get rid of add to calendar section and put add to calendar button in each itiner
 
       .video-container video {
         max-height: 180px;
+      }
+    }
+
+    @media (max-width: 375px) {
+      .events-side {
+        padding: 2.5rem 1rem;
+        margin-top: 1.5rem;
+      }
+
+      .animated-text {
+        font-size: clamp(2.2rem, 5.5vw, 3rem);
       }
     }
 
