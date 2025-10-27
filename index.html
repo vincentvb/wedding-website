@@ -1,524 +1,235 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tanaz & Vince - Save Our Date</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&family=Crimson+Text:wght@400;600;700&display=swap"
-    rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tanaz & Vince - Wedding</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="index.css">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      height: 100%;
-    }
-
-    body {
-      font-family: 'Mrs. Eaves Roman', 'Crimson Text', 'Times New Roman', serif;
-      line-height: 1.6;
-      overflow-x: hidden;
-      background-color: #E5E1D9;
-      margin: 0;
-      padding: 0;
-      height: 100%;
-    }
-
-    /* Combined Hero and Animated Text Section */
-    .hero-section {
-      height: 100vh;
+    .full-screen {
       min-height: 100vh;
-      max-height: 100vh;
-      display: flex;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* Left side - Couple's Image */
-    .image-side {
-      flex: 3;
-      background: #E5E1D9;
       display: flex;
       align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-
-    .couple-image {
-      width: 100%;
-      height: 100%;
-      background-image: url('tv2.jpeg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-    }
-
-    /* Right side - Animated Text */
-    .text-side {
-      flex: 2;
-      background: #E5E1D9;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      color: #52474275;
-      text-align: left;
-      padding-left: 2rem;
-      padding-right: 2rem;
-    }
-
-    .animated-text {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.8rem, 6vw, 5rem);
-      font-weight: 400;
-      line-height: 1.2;
-      max-width: 90%;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      color: #52474275;
-    }
-
-    @media (min-width: 769px) {
-      .animated-text {
-        margin-top: 3rem;
-      }
-    }
-
-    .animated-descriptor {
-      display: flex;
-      align-items: flex-start;
-      color: #52474275;
-      font-weight: 400;
-      min-width: 200px;
-      min-height: 5.5em;
-      text-align: left;
-      transition: all 0.5s ease-in-out;
-      opacity: 1;
-      transform: translateY(0);
-      line-height: 1.2;
-      margin-top: 0.5rem;
-      overflow: hidden;
-    }
-
-    /* Section 2: Event Details */
-    .details-section {
-      height: 100vh;
-      min-height: 100vh;
-      background: #E5E1D9;
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      position: relative;
-      padding: 2rem 0;
-    }
-
-    @media (max-width: 1200px) {
-      .details-section {
-        height: auto;
-        min-height: 100vh;
-      }
-      
-      .events-side {
-        height: auto;
-        min-height: auto;
-      }
-    }
-
-    /* Events - Full Width */
-    .events-side {
-      flex: 1;
-      width: 100%;
-      max-width: 1200px;
-      min-height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 3rem 2rem 3rem 2rem;
-      gap: 1rem;
-      box-sizing: border-box;
-    }
-
-    .events-container {
-      display: flex;
-      flex-direction: row;
-      gap: 1rem;
-      width: 100%;
-      flex-shrink: 0;
-    }
-
-    .event-item {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 1.5rem;
-      margin-bottom: 0;
-      background: #F5EDDC;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-      position: relative;
-      height: 280px;
-      text-align: center;
-      flex-shrink: 0;
-    }
-
-    .event-item:last-child {
-      margin-bottom: 0;
-    }
-
-    .event-date {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #52474275;
-      margin-bottom: 0.5rem;
-      position: relative;
-      z-index: 2;
-    }
-
-    .event-name {
-      font-size: 1.3rem;
-      color: #52474275;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      position: relative;
-      z-index: 2;
-    }
-
-    .event-location {
-      font-size: 1.1rem;
-      color: #52474275;
-      font-style: italic;
-      position: relative;
-      z-index: 2;
-    }
-
-    .event-description {
-      font-size: 1.1rem;
-      color: #52474275;
-      margin-top: 0.5rem;
-      position: relative;
-      z-index: 2;
-    }
-
-    /* Video Container */
-    .video-container {
-      width: 100%;
-      max-width: 1200px;
-      margin-top: 1rem;
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      flex-shrink: 0;
-    }
-
-    .video-container video {
-      width: 100%;
-      height: auto;
-      max-height: 350px;
-      object-fit: cover;
-      display: block;
-      pointer-events: none;
-      user-select: none;
-    }
-
-    /* Calendar Button */
-    .calendar-button-wrapper {
-      margin-top: 1rem;
-      display: flex;
-      justify-content: center;
-      width: 100%;
-      flex-shrink: 0;
-    }
-
-    .add-calendar-btn {
-      background: #E5E1D9;
-      color: #52474275;
-      border: 2px solid #52474275;
-      padding: 1rem 2rem;
-      font-size: 1.1rem;
-      font-family: 'Playfair Display', serif;
-      font-weight: 600;
-      border-radius: 50px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .add-calendar-btn:hover {
-      background: #52474275;
-      color: #E5E1D9;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(82, 71, 66, 0.3);
-    }
-
-    .add-calendar-btn:active {
-      transform: translateY(0);
-      box-shadow: 0 2px 10px rgba(82, 71, 66, 0.2);
-    }
-
-    /* Responsive Design */
-      @media (max-width: 768px) {
-       .hero-section {
-         flex-direction: column;
-         min-height: 100vh;
-       }
-
-       .image-side {
-         flex: 1;
-         min-height: clamp(50vh, 15vw + 45vh, 70vh);
-       }
-
-       .text-side {
-         flex: 0 0 auto;
-         padding-top: 1.5rem;
-         padding-bottom: 1rem;
-       }
-
-       .animated-text {
-         font-size: clamp(2.8rem, 6.5vw, 4.2rem);
-         padding: 1rem;
-       }
-
-       .details-section {
-         flex-direction: column;
-         height: auto;
-         min-height: 100vh;
-         max-height: none;
-         padding: 0;
-       }
-
-       .events-side {
-         flex: none;
-         padding: 0 1rem 3rem 1rem;
-         flex-direction: column;
-         gap: 1rem;
-         margin-top: 0;
-         height: auto;
-         min-height: auto;
-       }
-
-       .events-container {
-         flex-direction: column;
-         gap: 1rem;
-       }
-
-       .event-item {
-         margin-bottom: 1rem;
-         padding: 1.5rem;
-         height: auto;
-       }
-
-       .event-date {
-         font-size: 1.4rem;
-       }
-
-       .event-name {
-         font-size: 1.1rem;
-       }
-
-       .event-location {
-         font-size: 1rem;
-       }
-
-       .video-container video {
-         max-height: 200px;
-       }
-     }
-
-        @media (max-width: 480px) {
-       .image-side {
-         flex: 1;
-         min-height: clamp(55vh, 20vw + 50vh, 75vh);
-       }
-
-       .text-side {
-         flex: 0 0 auto;
-         padding-top: 1rem;
-         padding-bottom: 0.5rem;
-       }
-
-       .animated-text {
-         font-size: clamp(2.2rem, 5.5vw, 3.2rem);
-       }
-
-             .animated-descriptor {
-         min-width: 150px;
-         height: 3.5em;
-       }
-
-      .video-container video {
-        max-height: 180px;
-      }
     }
   </style>
-</head>
-
-<body>
-  <!-- Combined Hero and Animated Text Section -->
-  <section class="hero-section">
-    <!-- Left Side: Couple's Image -->
-    <div class="image-side">
-      <div class="couple-image">
-      </div>
-    </div>
-
-    <!-- Right Side: Animated Text -->
-    <div class="text-side">
-      <div class="animated-text">
-        Tanaz &<br>Vince are
-        <div class="animated-descriptor" id="descriptor">on a run</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Event Details Section -->
-  <section class="details-section">
-    <!-- Left Side: Events -->
-    <div class="events-side">
-      <div class="events-container">
-        <div class="event-item">
-          <div class="event-date">Thursday, April 30</div>
-          <div class="event-name">Welcome Party and Mehndi</div>
-          <div class="event-location">Location TBD</div>
-          <div class="event-description">We're kicking things off with drinks, good food, and great company! Come say hi, meet everyone, and help us pretend we’re not stressed about the rest of the weekend.
-          </div>
-        </div>
-
-        <div class="event-item">
-          <div class="event-date">Friday, May 1</div>
-          <div class="event-name">Pithi and Sangeet</div>
-          <div class="event-location">Gotham Hall</div>
-          <div class="event-description">At the pithi, guests will smear turmeric paste on the couple in the name of tradition (and skincare). Then it's sangeet time - expect colorful performances and beautiful chaos!
-          </div>
-        </div>
-
-        <div class="event-item">
-          <div class="event-date">Saturday, May 2</div>
-          <div class="event-name">Ceremony and Reception</div>
-          <div class="event-location">Gotham Hall</div>
-          <div class="event-description">The grand finale! Watch us make it official, try not to cry (or do, it's sweet). Then join us for food, drinks, and dancing. Can't wait to make memories with you all!
-          </div>
-        </div>
-      </div>
-
-      <!-- Video Section -->
-      <div class="video-container">
-        <video autoplay muted loop playsinline disablepictureinpicture>
-          <source src="design.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-      </div>
-
-      <!-- Add to Calendar Button -->
-      <div class="calendar-button-wrapper">
-        <button class="add-calendar-btn" onclick="addWeddingWeekendToCalendar()">
-          Add Our Wedding Weekend to Your Calendar
-        </button>
-      </div>
-    </div>
-
-    <!-- Right Side: Location and Image -->
-    <!-- Location-side section removed - events now take full width -->
-  </section>
-
   <script>
-    // Animated text descriptors
-    const descriptors = [
-      "on a run",
-      "trying a new recipe",
-      "serenading each other",
-      "reading a new fantasy series",
-      "drinking morning coffee",
-      "at the movie theater",
-      "planning their next trip",
-      "laughing their butts off",
-      "getting married!"
-    ];
-
-    let currentIndex = 0; // Start at first index
-    const descriptorElement = document.getElementById('descriptor');
-
-    function rotateDescriptor() {
-      // Start fade out
-      descriptorElement.style.transition = 'all 0.4s ease-in-out';
-      descriptorElement.style.opacity = '0';
-      descriptorElement.style.transform = 'translateY(-10px)';
-
-      setTimeout(() => {
-        currentIndex = (currentIndex + 1) % descriptors.length;
-        descriptorElement.textContent = descriptors[currentIndex];
-
-        // Start fade in
-        setTimeout(() => {
-          descriptorElement.style.opacity = '1';
-          descriptorElement.style.transform = 'translateY(0)';
-        }, 50);
-      }, 400);
+    const flippedState = {};
+    function toggleFlip(i) {
+      const card = document.querySelectorAll('.trivia-inner')[i];
+      flippedState[i] = !flippedState[i];
+      if (flippedState[i]) card.classList.add('flipped');
+      else card.classList.remove('flipped');
     }
-
-    function scheduleNextRotation() {
-      // Calculate what the next text will be
-      const nextIndex = (currentIndex + 1) % descriptors.length;
-      const nextText = descriptors[nextIndex];
-
-      // Use 4000ms for "getting married!", 2000ms for all others
-      const interval = nextText === "getting married!" ? 4000 : 2000;
-
-      setTimeout(() => {
-        rotateDescriptor();
-        scheduleNextRotation();
-      }, interval);
-    }
-
-    // Start the animation
-    scheduleNextRotation();
-
-    // Add Wedding Weekend to Calendar function
-    function addWeddingWeekendToCalendar() {
-      const startDate = '20260430'; // April 30, 2026
-      const endDate = '20260503';   // May 3, 2026 (Google Calendar end date is exclusive, so add 1 day)
-      const title = encodeURIComponent('Tanaz & Vince\'s Wedding Weekend');
-      const details = encodeURIComponent('Join us in New York City for a weekend of celebration!\n\nApril 30: Welcome Party and Mehndi Location TBD 7-10pm\nMay 1: Pithi and Sangeet at Gotham Hall 6pm-12am \nMay 2: Ceremony and Reception at Gotham Hall 6pm-1am');
-      const location = encodeURIComponent('New York City, NY');
-
-      const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startDate}/${endDate}&details=${details}&location=${location}`;
-      window.open(url, '_blank');
-    }
-
-    // Smooth scrolling for better UX
-    document.addEventListener('DOMContentLoaded', function () {
-      // Add smooth behavior
-      document.documentElement.style.scrollBehavior = 'smooth';
-
-      // Optional: Auto-scroll through sections every 10 seconds
-      let currentSection = 0;
-      const sections = document.querySelectorAll('section');
-
-      function autoScroll() {
-        if (currentSection < sections.length - 1) {
-          currentSection++;
-          sections[currentSection].scrollIntoView({ behavior: 'smooth' });
-        } else {
-          currentSection = 0;
-          sections[currentSection].scrollIntoView({ behavior: 'smooth' });
-        }
-      }
-
-      // Uncomment the line below to enable auto-scroll every 15 seconds
-      // setInterval(autoScroll, 15000);
-    });
   </script>
-</body>
+</head>
+<body>
 
+  <!-- SECTION 1: Hero with two columns -->
+  <section class="full-screen" style="background-color: #E5E1D9;">
+    <div class="w-full h-screen flex">
+      <!-- Left Column: Full-height Photo -->
+      <div class="w-1/2 h-full relative">
+        <img src="images/side.jpg" alt="Tanaz & Vince" class="w-full h-full object-cover">
+      </div>
+      <!-- Right Column: Text with Navigation -->
+      <div class="w-1/2 h-full flex flex-col">
+        <!-- Navigation Bar - only on right half -->
+        <nav class="w-full px-12 py-6 flex justify-end items-center gap-8">
+          <a href="index.html" class="nav-link font-semibold">Home</a>
+          <a href="cast.html" class="nav-link">Cast</a>
+          <a href="event.html" class="nav-link">Event Details</a>
+          <a href="#registry" class="nav-link">Registry</a>
+          <a href="#rsvp" class="nav-square">
+            RSVP
+          </a>
+        </nav>
+        <!-- Content -->
+        <div class="flex-1 flex items-center justify-start px-12">
+            <div class="space-y-8 max-w-xl ml-12">
+              <div>
+                <h1 class="hero-text mb-4" style="font-size: clamp(3.5rem, 6vw, 5.5rem);">Tanaz & Vince are getting married!</h1>
+                <p class="hero-subtext">April 30 - May 2</p>
+              </div>
+              <div class="flex gap-4">
+                <a href="#rsvp" class="nav-square">RSVP</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: Our Story - Card Version -->
+  <section class="full-screen" style="background-color: #E5E1D9;">
+    <div class="w-full h-screen flex items-center justify-center px-8 py-12">
+      <div class="w-full" style="max-width: 90%;">
+        <h2 class="section-title text-center mb-10">Our Story</h2>
+        <div class="flex gap-8">
+          <!-- Tanaz's Story Card -->
+          <div class="flex-1 event-card" style="padding: 2.5rem;">
+            <h3 class="section-title mb-6" style="font-size: clamp(1.5rem, 2.5vw, 2rem);">Tanaz's Version</h3>
+          <div class="space-y-4 mb-6">
+            <p class="prose" style="font-size: 1.125rem; line-height: 1.7;">
+              I remember that day at the boba shop so clearly. I was nervous about hosting the club event, but there was something about this quiet freshman with two milk teas that made me smile. He seemed a little lost but determined to make friends.
+            </p>
+            <p class="prose" style="font-size: 1.125rem; line-height: 1.7;">
+              Through college, we became friends first. I watched him grow from that shy freshman into someone confident and funny. Even during our long-distance years, he never stopped making me laugh with his random texts and terrible puns.
+            </p>
+            <p class="prose" style="font-size: 1.125rem; line-height: 1.7;">
+              When he proposed, I realized that somewhere along the way, my best friend had become the love of my life. I can't wait to start this new chapter with him.
+            </p>
+          </div>
+          <div class="w-full bg-gray-300 rounded-lg flex items-center justify-center" style="height: 250px;">
+            <span class="text-gray-500 font-medium">Photo Placeholder</span>
+          </div>
+        </div>
+
+          <!-- Vincent's Story Card -->
+          <div class="flex-1 event-card" style="padding: 2.5rem;">
+            <h3 class="section-title mb-6" style="font-size: clamp(1.5rem, 2.5vw, 2rem);">Vince's Version</h3>
+          <div class="space-y-4 mb-6">
+            <p class="prose" style="font-size: 1.125rem; line-height: 1.7;">
+              I was terrified that first week of college. When I saw her at the boba shop, confident and welcoming everyone, I knew I wanted to be her friend. Getting two drinks gave me an excuse to stay in line longer and maybe work up the courage to talk to her.
+            </p>
+            <p class="prose" style="font-size: 1.125rem; line-height: 1.7;">
+              She became my anchor through college and beyond. During the hardest times - moving across the country, changing careers, a global pandemic - she was always there with wisdom, support, and somehow always knew exactly what to say.
+            </p>
+            <p class="prose" style="font-size: 1.125rem; line-height: 1.7;">
+              Proposing was the easiest decision I've ever made. She's been my best friend for over a decade, and I want to spend the rest of my life making her as happy as she makes me.
+            </p>
+          </div>
+          <div class="w-full bg-gray-300 rounded-lg flex items-center justify-center" style="height: 250px;">
+            <span class="text-gray-500 font-medium">Photo Placeholder</span>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: Pop Quiz -->
+  <section class="full-screen" style="background-image: url('images/background.jpg'); background-size: cover; background-position: center;">
+    <div class="w-full h-screen flex items-center justify-center px-12 py-12">
+      <div class="max-w-7xl w-full">
+        <div class="event-card text-center mb-10 mx-auto" style="max-width: 800px; padding: 2rem; background-color: #FAF8F3;">
+          <h2 class="section-title mb-0">Pop Quiz: How Well Do You Know Us? Tap Card For Answer.</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          <!-- Card 0 -->
+          <button onclick="toggleFlip(0)" class="trivia-card perspective group fade-in" style="--delay:0s">
+            <div class="trivia-inner" style="height: 280px;">
+              <div class="trivia-front absolute inset-0 bg-white rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center">
+                <div class="text-2xl font-semibold">How did we meet?</div>
+              </div>
+              <div class="trivia-back absolute inset-0 rounded-2xl shadow-lg flex items-center justify-center p-6 rotate-y-180 text-center" style="background-color: #F5EDDC;">
+                <div class="text-2xl font-medium">At a boba shop during a college club event</div>
+              </div>
+            </div>
+          </button>
+
+          <!-- Card 1 -->
+          <button onclick="toggleFlip(1)" class="trivia-card perspective group fade-in" style="--delay:0.1s">
+            <div class="trivia-inner" style="height: 280px;">
+              <div class="trivia-front absolute inset-0 bg-white rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center">
+                <div class="text-2xl font-semibold">How long have we known each other?</div>
+              </div>
+              <div class="trivia-back absolute inset-0 rounded-2xl shadow-lg flex items-center justify-center p-6 rotate-y-180 text-center" style="background-color: #F5EDDC;">
+                <div class="text-2xl font-medium">Over 10 years</div>
+              </div>
+            </div>
+          </button>
+
+          <!-- Card 2 -->
+          <button onclick="toggleFlip(2)" class="trivia-card perspective group fade-in" style="--delay:0.2s">
+            <div class="trivia-inner" style="height: 280px;">
+              <div class="trivia-front absolute inset-0 bg-white rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center">
+                <div class="text-2xl font-semibold">Who was in a band?</div>
+              </div>
+              <div class="trivia-back absolute inset-0 rounded-2xl shadow-lg flex items-center justify-center p-6 rotate-y-180 text-center" style="background-color: #F5EDDC;">
+                <div class="text-2xl font-medium">Vince</div>
+              </div>
+            </div>
+          </button>
+
+          <!-- Card 3 -->
+          <button onclick="toggleFlip(3)" class="trivia-card perspective group fade-in" style="--delay:0.3s">
+            <div class="trivia-inner" style="height: 280px;">
+              <div class="trivia-front absolute inset-0 bg-white rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center">
+                <div class="text-2xl font-semibold">What did Vince order at the boba shop?</div>
+              </div>
+              <div class="trivia-back absolute inset-0 rounded-2xl shadow-lg flex items-center justify-center p-6 rotate-y-180 text-center" style="background-color: #F5EDDC;">
+                <div class="text-2xl font-medium">Two milk teas</div>
+              </div>
+            </div>
+          </button>
+
+          <!-- Card 4 -->
+          <button onclick="toggleFlip(4)" class="trivia-card perspective group fade-in" style="--delay:0.4s">
+            <div class="trivia-inner" style="height: 280px;">
+              <div class="trivia-front absolute inset-0 bg-white rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center">
+                <div class="text-2xl font-semibold">Where did they go to college?</div>
+              </div>
+              <div class="trivia-back absolute inset-0 rounded-2xl shadow-lg flex items-center justify-center p-6 rotate-y-180 text-center" style="background-color: #F5EDDC;">
+                <div class="text-2xl font-medium">UC Santa Cruz</div>
+              </div>
+            </div>
+          </button>
+
+          <!-- Card 5 -->
+          <button onclick="toggleFlip(5)" class="trivia-card perspective group fade-in" style="--delay:0.5s">
+            <div class="trivia-inner" style="height: 280px;">
+              <div class="trivia-front absolute inset-0 bg-white rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center">
+                <div class="text-2xl font-semibold">What year did they start dating?</div>
+              </div>
+              <div class="trivia-back absolute inset-0 rounded-2xl shadow-lg flex items-center justify-center p-6 rotate-y-180 text-center" style="background-color: #F5EDDC;">
+                <div class="text-2xl font-medium">2019</div>
+              </div>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: RSVP & Footer -->
+  <section id="rsvp" class="full-screen" style="background-color: #E5E1D9;">
+    <div class="w-full h-screen flex flex-col">
+      <!-- RSVP Content -->
+      <div class="flex-1 flex items-center justify-center px-12 py-12">
+        <div class="max-w-6xl w-full flex flex-col gap-8">
+          <!-- Video Card -->
+          <div class="event-card" style="padding: 0; overflow: hidden; height: 400px;">
+            <video autoplay loop muted playsinline class="w-full h-full object-cover">
+              <source src="images/design.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+
+          <!-- RSVP Text -->
+          <div class="text-center">
+            <h2 class="section-title mb-6">RSVP</h2>
+            <p class="prose mb-8 max-w-2xl mx-auto">
+              Please let us know if you'll be joining us for our special weekend. We can't wait to celebrate with you!
+            </p>
+            <a href="#" class="nav-square">
+              RSVP Now
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer class="py-8" style="background-color: #2C2825;">
+        <div class="max-w-5xl mx-auto px-6 text-center" style="color: #E5E1D9;">
+          <h3 class="text-xl font-semibold mb-2" style="font-family: 'Playfair Display', serif;">Tanaz & Vince</h3>
+          <p class="mb-4 text-md">April 30 - May 2, 2026 • New York City</p>
+        </div>
+      </footer>
+    </div>
+  </section>
+</body>
 </html>
