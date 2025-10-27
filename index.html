@@ -13,6 +13,131 @@
       display: flex;
       align-items: center;
     }
+
+    /* Responsive adjustments for smaller desktop screens */
+    @media (max-width: 1440px) {
+      .hero-section .w-1\/2 {
+        width: 50%;
+      }
+
+      .hero-content {
+        padding-left: 2rem !important;
+        padding-right: 2rem !important;
+      }
+
+      .hero-content .ml-12 {
+        margin-left: 0 !important;
+      }
+    }
+
+    @media (max-width: 1280px) {
+      .hero-text-custom {
+        font-size: clamp(2.5rem, 5vw, 4rem) !important;
+      }
+
+      .hero-content {
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+      }
+
+      nav.hero-nav {
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+        gap: 1.5rem !important;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .hero-text-custom {
+        font-size: clamp(2rem, 4vw, 3rem) !important;
+      }
+
+      nav.hero-nav {
+        gap: 1rem !important;
+      }
+
+      .nav-link {
+        font-size: 1rem !important;
+      }
+
+      .nav-square {
+        padding: 0.75rem 1.5rem !important;
+        font-size: 1rem !important;
+      }
+
+      .story-section .flex.gap-8 {
+        gap: 1.5rem !important;
+      }
+
+      .story-section .event-card {
+        padding: 2rem !important;
+      }
+
+      .story-section h3 {
+        font-size: clamp(1.25rem, 2vw, 1.75rem) !important;
+      }
+
+      .story-section .prose {
+        font-size: 1rem !important;
+      }
+    }
+
+    /* For very small desktop screens, stack story cards */
+    @media (max-width: 900px) {
+      .story-section .flex.gap-8 {
+        flex-direction: column !important;
+      }
+
+      .story-section .event-card {
+        width: 100% !important;
+      }
+    }
+
+    /* Ensure sections don't overlap */
+    @media (max-width: 1440px) {
+      .full-screen {
+        min-height: 100vh;
+      }
+
+      section.hero-section > div {
+        min-height: 100vh;
+      }
+
+      /* Allow story section to be taller if needed */
+      .story-section > div {
+        min-height: 100vh;
+        height: auto;
+      }
+
+      .story-section {
+        padding: 3rem 0;
+      }
+    }
+
+    @media (max-width: 1280px) {
+      .section-title {
+        font-size: clamp(1.75rem, 3.5vw, 2.5rem) !important;
+      }
+
+      .quiz-section .trivia-card .text-2xl {
+        font-size: 1.5rem !important;
+      }
+
+      .quiz-section .event-card {
+        padding: 1.5rem !important;
+        max-width: 700px !important;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .quiz-section .trivia-inner {
+        height: 240px !important;
+      }
+
+      .quiz-section .trivia-card .text-2xl {
+        font-size: 1.25rem !important;
+      }
+    }
   </style>
   <script>
     const flippedState = {};
@@ -27,7 +152,7 @@
 <body>
 
   <!-- SECTION 1: Hero with two columns -->
-  <section class="full-screen" style="background-color: #E5E1D9;">
+  <section class="full-screen hero-section" style="background-color: #E5E1D9;">
     <div class="w-full h-screen flex">
       <!-- Left Column: Full-height Photo -->
       <div class="w-1/2 h-full relative">
@@ -36,20 +161,20 @@
       <!-- Right Column: Text with Navigation -->
       <div class="w-1/2 h-full flex flex-col">
         <!-- Navigation Bar - only on right half -->
-        <nav class="w-full px-12 py-6 flex justify-end items-center gap-8">
+        <nav class="hero-nav w-full px-12 py-6 flex justify-end items-center gap-8">
           <a href="index.html" class="nav-link font-semibold">Home</a>
           <a href="cast.html" class="nav-link">Cast</a>
           <a href="event.html" class="nav-link">Event Details</a>
-          <a href="#registry" class="nav-link">Registry</a>
+          <a href="https://withjoy.com/tanaz-and-vincent/registry" target="_blank" rel="noreferrer" class="nav-link">Registry</a>
           <a href="#rsvp" class="nav-square">
             RSVP
           </a>
         </nav>
         <!-- Content -->
-        <div class="flex-1 flex items-center justify-start px-12">
+        <div class="hero-content flex-1 flex items-center justify-start px-12">
             <div class="space-y-8 max-w-xl ml-12">
               <div>
-                <h1 class="hero-text mb-4" style="font-size: clamp(3.5rem, 6vw, 5.5rem);">Tanaz & Vince are getting married!</h1>
+                <h1 class="hero-text hero-text-custom mb-4" style="font-size: clamp(3.5rem, 6vw, 5.5rem);">Tanaz & Vince are getting married!</h1>
                 <p class="hero-subtext">April 30 - May 2</p>
               </div>
               <div class="flex gap-4">
@@ -63,8 +188,8 @@
   </section>
 
   <!-- SECTION 2: Our Story - Card Version -->
-  <section class="full-screen" style="background-color: #E5E1D9;">
-    <div class="w-full h-screen flex items-center justify-center px-8 py-12">
+  <section class="full-screen story-section" style="background-color: #E5E1D9;">
+    <div class="w-full min-h-screen flex items-center justify-center px-8 py-12">
       <div class="w-full" style="max-width: 90%;">
         <h2 class="section-title text-center mb-10">Our Story</h2>
         <div class="flex gap-8">
@@ -111,8 +236,8 @@
   </section>
 
   <!-- SECTION 3: Pop Quiz -->
-  <section class="full-screen" style="background-image: url('images/background.jpg'); background-size: cover; background-position: center;">
-    <div class="w-full h-screen flex items-center justify-center px-12 py-12">
+  <section class="full-screen quiz-section" style="background-image: url('images/background.jpg'); background-size: cover; background-position: center;">
+    <div class="w-full min-h-screen flex items-center justify-center px-12 py-12">
       <div class="max-w-7xl w-full">
         <div class="event-card text-center mb-10 mx-auto" style="max-width: 800px; padding: 2rem; background-color: #FAF8F3;">
           <h2 class="section-title mb-0">Pop Quiz: How Well Do You Know Us? Tap Card For Answer.</h2>
@@ -196,8 +321,8 @@
   </section>
 
   <!-- SECTION 4: RSVP & Footer -->
-  <section id="rsvp" class="full-screen" style="background-color: #E5E1D9;">
-    <div class="w-full h-screen flex flex-col">
+  <section id="rsvp" class="full-screen rsvp-section" style="background-color: #E5E1D9;">
+    <div class="w-full min-h-screen flex flex-col">
       <!-- RSVP Content -->
       <div class="flex-1 flex items-center justify-center px-12 py-12">
         <div class="max-w-6xl w-full flex flex-col gap-8">

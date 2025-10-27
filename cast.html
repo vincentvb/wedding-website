@@ -13,6 +13,147 @@
       display: flex;
       align-items: center;
     }
+
+    /* Responsive adjustments for smaller desktop screens */
+    @media (max-width: 1440px) {
+      nav .max-w-screen-2xl {
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+
+      .bride-groom-section .p-16 {
+        padding: 3rem !important;
+      }
+
+      .bride-groom-section h2 {
+        font-size: clamp(2.5rem, 4vw, 3.5rem) !important;
+      }
+
+      .bride-groom-section h3 {
+        font-size: clamp(1.25rem, 2vw, 1.5rem) !important;
+      }
+    }
+
+    @media (max-width: 1280px) {
+      nav .flex.gap-8 {
+        gap: 1.5rem !important;
+      }
+
+      .nav-link {
+        font-size: 1rem !important;
+      }
+
+      .nav-square {
+        padding: 0.75rem 1.5rem !important;
+        font-size: 1rem !important;
+      }
+
+      .bride-groom-section .p-16 {
+        padding: 2rem !important;
+      }
+
+      .bride-groom-section {
+        min-height: 500px !important;
+      }
+
+      .bride-groom-section h2 {
+        font-size: clamp(2rem, 3.5vw, 3rem) !important;
+      }
+
+      .cast-grid h3 {
+        font-size: 1.5rem !important;
+      }
+
+      .cast-grid p {
+        font-size: 0.75rem !important;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      nav .max-w-screen-2xl {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+
+      nav .flex.gap-8 {
+        gap: 1rem !important;
+      }
+
+      .bride-groom-section .p-16 {
+        padding: 1.5rem !important;
+      }
+
+      .bride-groom-section {
+        min-height: 400px !important;
+      }
+
+      .bride-groom-section h2 {
+        font-size: clamp(1.75rem, 3vw, 2.5rem) !important;
+      }
+
+      .bride-groom-section h3 {
+        font-size: 1.125rem !important;
+      }
+
+      .bride-groom-section .prose {
+        font-size: 0.95rem !important;
+      }
+
+      /* Change grid to 2 columns on medium screens */
+      .cast-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+
+      .cast-grid h3 {
+        font-size: 1.25rem !important;
+      }
+
+      .cast-grid .p-6 {
+        padding: 1rem !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      /* Stack bride/groom sections vertically */
+      .bride-groom-grid {
+        grid-template-columns: 1fr !important;
+      }
+
+      .bride-groom-section {
+        min-height: 300px !important;
+      }
+
+      /* Single column for cast grid */
+      .cast-grid {
+        grid-template-columns: 1fr !important;
+      }
+    }
+
+    /* Ensure hero text scales */
+    @media (max-width: 1280px) {
+      .hero-text {
+        font-size: clamp(2rem, 4vw, 3rem) !important;
+      }
+
+      .section-title {
+        font-size: clamp(1.75rem, 3.5vw, 2.5rem) !important;
+      }
+    }
+
+    /* RSVP section adjustments */
+    @media (max-width: 1024px) {
+      .rsvp-section .px-12 {
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .rsvp-section .px-12 {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -24,7 +165,7 @@
         <a href="index.html" class="nav-link">Home</a>
         <a href="cast.html" class="nav-link font-semibold">Cast</a>
         <a href="event.html" class="nav-link">Event Details</a>
-        <a href="index.html#registry" class="nav-link">Registry</a>
+        <a href="https://withjoy.com/tanaz-and-vincent/registry" target="_blank" rel="noreferrer" class="nav-link">Registry</a>
       </div>
       <a href="index.html#rsvp" class="nav-square">
         RSVP
@@ -42,13 +183,13 @@
   <!-- Bride and Groom Grid Section -->
   <section class="py-0">
     <!-- Tanaz -->
-    <div class="grid grid-cols-2 max-w-full">
-      <div class="relative overflow-hidden" style="background-color: #E5E1D9; min-height: 600px;">
+    <div class="bride-groom-grid grid grid-cols-2 max-w-full">
+      <div class="bride-groom-section relative overflow-hidden" style="background-color: #E5E1D9; min-height: 600px;">
         <div class="w-full h-full flex items-center justify-center text-gray-500">
           <span>Bride Photo Placeholder</span>
         </div>
       </div>
-      <div class="flex flex-col justify-center p-16" style="background-color: #F5EDDC; min-height: 600px;">
+      <div class="bride-groom-section flex flex-col justify-center p-16" style="background-color: #F5EDDC; min-height: 600px;">
         <h2 class="hero-text" style="font-size: 4rem; margin-bottom: 1rem; line-height: 1.1;">Tanaz</h2>
         <h3 class="section-title" style="font-size: 1.5rem; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 2rem; opacity: 1;">THE BRIDE</h3>
         <div class="prose" style="max-width: none;">
@@ -59,8 +200,8 @@
     </div>
 
     <!-- Vince -->
-    <div class="grid grid-cols-2 max-w-full">
-      <div class="flex flex-col justify-center p-16" style="background-color: #F5EDDC; min-height: 600px;">
+    <div class="bride-groom-grid grid grid-cols-2 max-w-full">
+      <div class="bride-groom-section flex flex-col justify-center p-16" style="background-color: #F5EDDC; min-height: 600px;">
         <h2 class="hero-text" style="font-size: 4rem; margin-bottom: 1rem; line-height: 1.1;">Vince</h2>
         <h3 class="section-title" style="font-size: 1.5rem; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 2rem; opacity: 1;">THE GROOM</h3>
         <div class="prose" style="max-width: none;">
@@ -68,7 +209,7 @@
           <p>Whether he's coding, making music, or planning the perfect surprise, Vince brings joy and laughter to everything he does.</p>
         </div>
       </div>
-      <div class="relative overflow-hidden" style="background-color: #E5E1D9; min-height: 600px;">
+      <div class="bride-groom-section relative overflow-hidden" style="background-color: #E5E1D9; min-height: 600px;">
         <div class="w-full h-full flex items-center justify-center text-gray-500">
           <span>Groom Photo Placeholder</span>
         </div>
@@ -85,7 +226,7 @@
 
   <!-- Wedding Party Grid -->
   <section class="py-0">
-    <div class="grid grid-cols-4 max-w-full">
+    <div class="cast-grid grid grid-cols-4 max-w-full">
       <!-- Row 1 -->
       <div class="relative aspect-square overflow-hidden" style="background-color: #E5B4B4;">
         <div class="w-full h-full flex items-center justify-center text-gray-500">
@@ -189,7 +330,7 @@
   </section>
 
   <!-- RSVP Section -->
-  <section class="py-20" style="background-color: #E5E1D9;">
+  <section class="rsvp-section py-20" style="background-color: #E5E1D9;">
     <div class="flex items-center justify-center px-12">
       <div class="max-w-6xl w-full flex flex-col gap-8">
         <!-- Video Card -->

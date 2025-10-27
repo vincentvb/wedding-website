@@ -47,6 +47,205 @@
       height: 100%;
       object-fit: cover;
     }
+
+    /* Ensure sections maintain spacing */
+    section {
+      position: relative;
+    }
+
+    /* Responsive adjustments for smaller desktop screens */
+    @media (max-width: 1440px) {
+      nav .max-w-screen-2xl {
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+
+      .event-section .max-w-screen-2xl {
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+
+      .carousel-item {
+        width: 250px;
+        height: 350px;
+      }
+
+      @keyframes scroll {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(calc(-266px * 17)); }
+      }
+
+      /* Reduce section padding slightly on medium screens */
+      section[style*="padding-top: 4rem"] {
+        padding-top: 3rem !important;
+        padding-bottom: 3rem !important;
+      }
+    }
+
+    @media (max-width: 1280px) {
+      nav .flex.gap-8 {
+        gap: 1.5rem !important;
+      }
+
+      .nav-link {
+        font-size: 1rem !important;
+      }
+
+      .nav-square {
+        padding: 0.75rem 1.5rem !important;
+        font-size: 1rem !important;
+      }
+
+      .hero-text {
+        font-size: clamp(2rem, 4vw, 3rem) !important;
+      }
+
+      .section-title {
+        font-size: clamp(1.75rem, 3.5vw, 2.5rem) !important;
+      }
+
+      .event-card h3 {
+        font-size: 1.5rem !important;
+      }
+
+      .event-card p,
+      .event-card ul li {
+        font-size: 1rem !important;
+      }
+
+      /* Stack event cards into 2 columns on medium screens */
+      .three-day-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+
+      .three-day-grid > div:last-child {
+        grid-column: 1 / -1;
+      }
+
+      /* Stack NYC cards into 2 columns */
+      .nyc-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+
+      .nyc-grid > div:last-child {
+        grid-column: 1 / -1;
+      }
+
+      /* FAQ grid adjustments */
+      .faq-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+
+      /* Eat & Drink and Things To Do remain 2 columns */
+    }
+
+    @media (max-width: 1024px) {
+      nav .max-w-screen-2xl {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+
+      nav .flex.gap-8 {
+        gap: 1rem !important;
+      }
+
+      .event-section .max-w-screen-2xl {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+
+      .carousel-item {
+        width: 220px;
+        height: 300px;
+      }
+
+      @keyframes scroll {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(calc(-236px * 17)); }
+      }
+
+      .event-card {
+        padding: 1.5rem !important;
+      }
+
+      .event-card h3 {
+        font-size: 1.25rem !important;
+      }
+
+      .event-card h4 {
+        font-size: 1rem !important;
+      }
+
+      /* Reduce section padding on smaller screens */
+      section[style*="padding-top"] {
+        padding-top: 2rem !important;
+        padding-bottom: 2rem !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      /* Stack all grids to single column on mobile */
+      .three-day-grid,
+      .nyc-grid,
+      .faq-grid,
+      .eat-drink-grid {
+        grid-template-columns: 1fr !important;
+      }
+
+      .three-day-grid > div:last-child,
+      .nyc-grid > div:last-child {
+        grid-column: auto;
+      }
+
+      .carousel-item {
+        width: 180px;
+        height: 250px;
+      }
+
+      @keyframes scroll {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(calc(-196px * 17)); }
+      }
+
+      nav .max-w-screen-2xl {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+
+      .event-section .max-w-screen-2xl {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+
+      /* Further reduce section padding on mobile */
+      section[style*="padding-top"] {
+        padding-top: 1.5rem !important;
+        padding-bottom: 1.5rem !important;
+      }
+    }
+
+    /* Ensure video card scales properly */
+    @media (max-width: 1024px) {
+      .event-card video {
+        height: 300px !important;
+      }
+
+      .rsvp-section .px-12 {
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .event-card video {
+        height: 250px !important;
+      }
+
+      .rsvp-section .px-12 {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+      }
+    }
   </style>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -73,7 +272,7 @@
         <a href="index.html" class="nav-link">Home</a>
         <a href="cast.html" class="nav-link">Cast</a>
         <a href="event.html" class="nav-link font-semibold">Event Details</a>
-        <a href="index.html#registry" class="nav-link">Registry</a>
+        <a href="https://withjoy.com/tanaz-and-vincent/registry" target="_blank" rel="noreferrer" class="nav-link">Registry</a>
       </div>
       <a href="index.html#rsvp" class="nav-square">
         RSVP
@@ -82,8 +281,8 @@
   </nav>
 
   <!-- SECTION 1: Image Carousel & Intro -->
-  <section class="full-screen" style="background-color: #E5E1D9;">
-    <div class="w-full max-w-screen-2xl mx-auto px-12 pt-4 pb-20">
+  <section class="full-screen event-section" style="background-color: #E5E1D9; padding-top: 2rem; padding-bottom: 4rem;">
+    <div class="w-full max-w-screen-2xl mx-auto px-12">
       <div class="text-center mb-12">
         <h1 class="hero-text mb-4">Tanaz & Vince</h1>
         <p class="prose max-w-3xl mx-auto" style="font-size: 1.125rem; line-height: 1.7;">
@@ -116,11 +315,11 @@
   </section>
 
   <!-- SECTION 2: Three Day Event Cards -->
-  <section class="full-screen" style="background-color: #F5EDDC;">
+  <section class="full-screen event-section" style="background-color: #F5EDDC; padding-top: 4rem; padding-bottom: 4rem;">
     <div class="w-full max-w-screen-2xl mx-auto px-12">
       <h2 class="section-title text-center mb-12">Three Days of Celebration</h2>
-      
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+      <div class="three-day-grid grid grid-cols-1 md:grid-cols-3 gap-8">
         <!-- Day 1: Thursday -->
         <div class="event-card" style="background-color: #FAF8F3;">
           <h3 class="text-2xl font-bold mb-4" style="font-family: 'Playfair Display', serif; color: #D4A574;">Thursday, April 30</h3>
@@ -211,14 +410,12 @@
   </section>
 
   <!-- SECTION 3: NYC Information & Footer -->
-  <section style="background-color: #E5E1D9;">
+  <section class="event-section" style="background-color: #E5E1D9; padding-top: 4rem; padding-bottom: 4rem;">
     <div class="w-full">
-      <!-- NYC Information -->
-      <div class="pt-16 pb-20">
         <div class="max-w-screen-2xl mx-auto px-12">
           <h2 class="section-title text-center mb-12">Visiting New York City</h2>
 
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="nyc-grid grid grid-cols-1 md:grid-cols-3 gap-8">
             <!-- Getting There -->
             <div class="event-card" style="background-color: #FAF8F3;">
               <h3 class="text-2xl font-bold mb-6" style="font-family: 'Playfair Display', serif; color: #D4A574;">Getting There</h3>
@@ -280,7 +477,7 @@
           <div class="max-w-screen-2xl mx-auto px-12 mt-16">
             <h2 class="section-title text-center mb-12">FAQ</h2>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="faq-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               <!-- FAQ Card 1 -->
               <div class="bg-white rounded-2xl shadow-lg p-6 text-center">
                 <h4 class="text-xl font-semibold mb-3" style="font-family: 'Playfair Display', serif; color: #524742;">What should I wear?</h4>
@@ -321,7 +518,7 @@
 
           <!-- Eat & Drink and Things to Do Section -->
           <div class="max-w-screen-2xl mx-auto px-12 mt-16">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="eat-drink-grid grid grid-cols-1 md:grid-cols-2 gap-8">
               <!-- Eat & Drink -->
               <div class="event-card" style="background-color: #FAF8F3;">
                 <h3 class="text-2xl font-bold mb-6" style="font-family: 'Playfair Display', serif; color: #D4A574;">Eat & Drink</h3>
@@ -357,7 +554,7 @@
   </section>
 
   <!-- RSVP Section -->
-  <section class="pt-12 pb-20" style="background-color: #E5E1D9;">
+  <section class="rsvp-section" style="background-color: #E5E1D9; padding-top: 3rem; padding-bottom: 5rem;">
     <div class="flex items-center justify-center px-12">
       <div class="max-w-6xl w-full flex flex-col gap-8">
         <!-- Video Card -->
