@@ -140,6 +140,11 @@
     }
   </style>
   <script>
+    // Check authentication
+    if (sessionStorage.getItem('authenticated') !== 'true') {
+      window.location.href = 'password.html';
+    }
+
     const flippedState = {};
     function toggleFlip(i) {
       const card = document.querySelectorAll('.trivia-inner')[i];
@@ -161,20 +166,17 @@
       <!-- Right Column: Text with Navigation -->
       <div class="w-1/2 h-full flex flex-col">
         <!-- Navigation Bar - only on right half -->
-        <nav class="hero-nav w-full px-12 py-6 flex justify-end items-center gap-8">
+        <nav class="hero-nav w-full px-12 pt-8 pb-6 flex justify-end items-center gap-8">
           <a href="index.html" class="nav-link font-semibold">Home</a>
           <a href="cast.html" class="nav-link">Cast</a>
           <a href="event.html" class="nav-link">Event Details</a>
           <a href="https://withjoy.com/tanaz-and-vincent/registry" target="_blank" rel="noreferrer" class="nav-link">Registry</a>
-          <a href="#rsvp" class="nav-square">
-            RSVP
-          </a>
         </nav>
         <!-- Content -->
         <div class="hero-content flex-1 flex items-center justify-start px-12">
             <div class="space-y-8 max-w-xl ml-12">
               <div>
-                <h1 class="hero-text hero-text-custom mb-4" style="font-size: clamp(3.5rem, 6vw, 5.5rem);">Tanaz & Vince are getting married!</h1>
+                <h1 class="hero-text hero-text-custom mb-4" style="font-size: clamp(3.5rem, 6vw, 5.5rem);">Tanaz & Vince are getting married</h1>
                 <p class="hero-subtext">April 30 - May 2</p>
               </div>
               <div class="flex gap-4">
@@ -325,7 +327,7 @@
     <div class="w-full min-h-screen flex flex-col">
       <!-- RSVP Content -->
       <div class="flex-1 flex items-center justify-center px-12 py-12">
-        <div class="max-w-6xl w-full flex flex-col gap-8">
+        <div class="max-w-6xl w-full flex flex-col">
           <!-- Video Card -->
           <div class="event-card" style="padding: 0; overflow: hidden; height: 400px;">
             <video autoplay loop muted playsinline class="w-full h-full object-cover">
@@ -334,14 +336,10 @@
             </video>
           </div>
 
-          <!-- RSVP Text -->
-          <div class="text-center">
-            <h2 class="section-title mb-6">RSVP</h2>
-            <p class="prose mb-8 max-w-2xl mx-auto">
-              Please let us know if you'll be joining us for our special weekend. We can't wait to celebrate with you!
-            </p>
+          <!-- RSVP Button -->
+          <div class="text-center mt-12">
             <a href="#" class="nav-square">
-              RSVP Now
+              RSVP
             </a>
           </div>
         </div>

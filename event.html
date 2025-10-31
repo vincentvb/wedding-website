@@ -248,6 +248,11 @@
     }
   </style>
   <script>
+    // Check authentication
+    if (sessionStorage.getItem('authenticated') !== 'true') {
+      window.location.href = 'password.html';
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
       // Clone items multiple times for extended seamless loop
       const track = document.querySelector('.carousel-track');
@@ -474,8 +479,10 @@
           </div>
 
           <!-- FAQ Section -->
-          <div class="max-w-screen-2xl mx-auto px-12 mt-16">
-            <h2 class="section-title text-center mb-12">FAQ</h2>
+          <div class="max-w-screen-2xl mx-auto px-12 mt-16 py-12 rounded-lg" style="background-image: url('images/background.jpg'); background-size: cover; background-position: center;">
+            <div class="event-card text-center mb-10 mx-auto" style="max-width: 800px; padding: 2rem; background-color: #FAF8F3;">
+              <h2 class="section-title mb-0">FAQ</h2>
+            </div>
 
             <div class="faq-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               <!-- FAQ Card 1 -->
@@ -556,7 +563,7 @@
   <!-- RSVP Section -->
   <section class="rsvp-section" style="background-color: #E5E1D9; padding-top: 3rem; padding-bottom: 5rem;">
     <div class="flex items-center justify-center px-12">
-      <div class="max-w-6xl w-full flex flex-col gap-8">
+      <div class="max-w-6xl w-full flex flex-col">
         <!-- Video Card -->
         <div class="event-card" style="padding: 0; overflow: hidden; height: 400px;">
           <video autoplay loop muted playsinline class="w-full h-full object-cover">
@@ -565,14 +572,10 @@
           </video>
         </div>
 
-        <!-- RSVP Text -->
-        <div class="text-center">
-          <h2 class="section-title mb-6">RSVP</h2>
-          <p class="prose mb-8 max-w-2xl mx-auto">
-            Please let us know if you'll be joining us for our special weekend. We can't wait to celebrate with you!
-          </p>
+        <!-- RSVP Button -->
+        <div class="text-center mt-12">
           <a href="index.html#rsvp" class="nav-square">
-            RSVP Now
+            RSVP
           </a>
         </div>
       </div>

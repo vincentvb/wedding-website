@@ -155,6 +155,12 @@
       }
     }
   </style>
+  <script>
+    // Check authentication
+    if (sessionStorage.getItem('authenticated') !== 'true') {
+      window.location.href = 'password.html';
+    }
+  </script>
 </head>
 <body>
 
@@ -332,7 +338,7 @@
   <!-- RSVP Section -->
   <section class="rsvp-section py-20" style="background-color: #E5E1D9;">
     <div class="flex items-center justify-center px-12">
-      <div class="max-w-6xl w-full flex flex-col gap-8">
+      <div class="max-w-6xl w-full flex flex-col">
         <!-- Video Card -->
         <div class="event-card" style="padding: 0; overflow: hidden; height: 400px;">
           <video autoplay loop muted playsinline class="w-full h-full object-cover">
@@ -341,14 +347,10 @@
           </video>
         </div>
 
-        <!-- RSVP Text -->
-        <div class="text-center">
-          <h2 class="section-title mb-6">RSVP</h2>
-          <p class="prose mb-8 max-w-2xl mx-auto">
-            Please let us know if you'll be joining us for our special weekend. We can't wait to celebrate with you!
-          </p>
+        <!-- RSVP Button -->
+        <div class="text-center mt-12">
           <a href="index.html#rsvp" class="nav-square">
-            RSVP Now
+            RSVP
           </a>
         </div>
       </div>
