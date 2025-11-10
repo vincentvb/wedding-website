@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Travel - Tanaz & Vince Wedding</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="index.css">
+  <style>
+    .full-screen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+    }
+
+    /* Responsive adjustments for smaller desktop screens */
+    @media (max-width: 1440px) {
+      nav .max-w-screen-2xl {
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+    }
+
+    @media (max-width: 1280px) {
+      nav .flex.gap-8 {
+        gap: 1.5rem !important;
+      }
+
+      .nav-link {
+        font-size: 1rem !important;
+      }
+
+      .nav-square {
+        padding: 0.75rem 1.5rem !important;
+        font-size: 1rem !important;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      nav .max-w-screen-2xl {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+
+      nav .flex.gap-8 {
+        gap: 1rem !important;
+      }
+
+      .rsvp-section .px-12 {
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+      }
+    }
+
+    /* Hamburger Menu Styles */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      padding: 1rem;
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 999;
+      background-color: rgba(229, 225, 217, 0.9);
+      border-radius: 0.5rem;
+    }
+
+    .hamburger span {
+      width: 35px;
+      height: 4px;
+      background-color: #524742;
+      margin: 4px 0;
+      transition: 0.3s;
+      border-radius: 2px;
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(229, 225, 217, 0.98);
+      z-index: 1000;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(2rem, 5vh, 4rem);
+      padding: 2rem 1.5rem;
+    }
+
+    .mobile-menu.active {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      font-size: clamp(2rem, 6vw, 3.5rem) !important;
+      font-weight: 500 !important;
+    }
+
+    .mobile-menu .nav-square {
+      font-size: clamp(1.75rem, 5vw, 3rem) !important;
+      padding: clamp(0.75rem, 2vh, 1.5rem) clamp(1.5rem, 5vw, 3.5rem) !important;
+      margin-top: clamp(0.5rem, 2vh, 1.5rem);
+    }
+
+    .close-menu {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      font-size: clamp(3rem, 8vw, 5rem) !important;
+      cursor: pointer;
+      color: #524742;
+      font-weight: 300;
+      line-height: 1;
+    }
+
+    @media (max-width: 768px) {
+      /* Mobile navigation */
+      .hamburger {
+        display: flex !important;
+      }
+
+      /* Force large text in mobile menu */
+      .mobile-menu a.nav-link {
+        font-size: clamp(2rem, 6vw, 3.5rem) !important;
+      }
+
+      .mobile-menu a.nav-square {
+        font-size: clamp(1.75rem, 5vw, 3rem) !important;
+      }
+
+      /* Adjust for very small screens */
+      @media (max-height: 700px) {
+        .mobile-menu {
+          gap: 1.5rem !important;
+        }
+
+        .mobile-menu a {
+          font-size: 2rem !important;
+        }
+
+        .mobile-menu .nav-square {
+          font-size: 1.75rem !important;
+          padding: 0.75rem 1.5rem !important;
+          margin-top: 0.5rem !important;
+        }
+
+        .close-menu {
+          font-size: 3rem !important;
+        }
+      }
+
+      nav {
+        display: none !important;
+      }
+
+      /* Hero section padding */
+      section.pt-16 {
+        padding-top: 2rem !important;
+        padding-bottom: 2rem !important;
+      }
+
+      section.pt-16 .max-w-7xl {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+      }
+
+      .hero-text {
+        font-size: 2rem !important;
+      }
+
+      /* NYC grid sections */
+      .nyc-grid {
+        grid-template-columns: 1fr !important;
+      }
+
+      .eat-drink-grid {
+        grid-template-columns: 1fr !important;
+      }
+
+      /* Remove extra padding from eat & drink wrapper on mobile */
+      .max-w-screen-2xl.px-12.mt-16 {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        margin-top: 2rem !important;
+      }
+
+      /* RSVP Section - match home page */
+      .rsvp-section {
+        min-height: auto !important;
+        padding: 1.5rem 0 0 0 !important;
+      }
+
+      .rsvp-section .px-12 {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+        padding-bottom: 0 !important;
+      }
+
+      .rsvp-section .flex.items-center.justify-center {
+        padding-bottom: 0 !important;
+      }
+
+      .rsvp-section .event-card {
+        height: 250px !important;
+      }
+
+      .rsvp-section .text-center.mt-12 {
+        margin-top: 1.5rem !important;
+        margin-bottom: 0 !important;
+        padding-bottom: 1.5rem !important;
+      }
+
+      /* Footer - remove all padding on mobile */
+      footer {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100vw !important;
+        position: relative;
+        left: 0;
+        right: 0;
+      }
+
+      footer .max-w-5xl {
+        max-width: 100% !important;
+        padding: 1.5rem 0 !important;
+        margin: 0 !important;
+      }
+    }
+
+    /* Extra small mobile devices */
+    @media (max-width: 480px) {
+      .hero-text {
+        font-size: 1.5rem !important;
+      }
+
+      /* RSVP video for very small screens */
+      .rsvp-section .event-card {
+        height: 200px !important;
+      }
+
+      .rsvp-section .text-center.mt-12 {
+        padding-bottom: 1rem !important;
+      }
+    }
+  </style>
+  <script>
+    // Check authentication
+    if (sessionStorage.getItem('authenticated') !== 'true') {
+      window.location.href = 'password.html';
+    }
+
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('active');
+    }
+  </script>
+</head>
+<body>
+
+  <!-- Hamburger Menu Button -->
+  <div class="hamburger" onclick="toggleMobileMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu" id="mobileMenu">
+    <span class="close-menu" onclick="toggleMobileMenu()">&times;</span>
+    <a href="index.html" class="nav-link" onclick="toggleMobileMenu()">Home</a>
+    <a href="cast.html" class="nav-link" onclick="toggleMobileMenu()">Cast</a>
+    <a href="event.html" class="nav-link" onclick="toggleMobileMenu()">Event Details</a>
+    <a href="travel.html" class="nav-link" onclick="toggleMobileMenu()">Travel</a>
+    <a href="https://withjoy.com/tanaz-and-vincent/registry" target="_blank" rel="noreferrer" class="nav-link" onclick="toggleMobileMenu()">Registry</a>
+    <a href="index.html#rsvp" class="nav-square" onclick="toggleMobileMenu()">RSVP</a>
+  </div>
+
+  <!-- Navigation Bar -->
+  <nav class="bg-white/95 backdrop-blur-sm shadow-sm">
+    <div class="max-w-screen-2xl mx-auto px-12 py-4 flex justify-between items-center">
+      <div class="flex items-center gap-8">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="cast.html" class="nav-link">Cast</a>
+        <a href="event.html" class="nav-link">Event Details</a>
+        <a href="travel.html" class="nav-link font-semibold">Travel</a>
+        <a href="https://withjoy.com/tanaz-and-vincent/registry" target="_blank" rel="noreferrer" class="nav-link">Registry</a>
+      </div>
+      <a href="index.html#rsvp" class="nav-square">
+        RSVP
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero Section with Title -->
+  <section class="pt-16 pb-16" style="background-color: #E5E1D9;">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <h1 class="hero-text">Visiting New York City</h1>
+    </div>
+  </section>
+
+  <!-- NYC Information Section -->
+  <section class="event-section" style="background-color: #E5E1D9; padding-top: 0; padding-bottom: 0;">
+    <div class="w-full">
+      <div class="max-w-screen-2xl mx-auto px-12">
+        <div class="nyc-grid grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Getting There -->
+          <div class="event-card" style="background-color: #FAF8F3;">
+            <h3 class="text-2xl font-bold mb-6" style="font-family: 'Playfair Display', serif; color: #D4A574;">Getting There</h3>
+            <div class="space-y-4">
+              <div>
+                <h4 class="font-semibold mb-2">✈️ By Air</h4>
+                <p class="prose" style="font-size: 1.125rem; line-height: 1.7;">Fly into JFK, Newark (EWR), or LaGuardia (LGA). JFK and Newark offer the easiest access to Manhattan via AirTrain and subway/train connections.</p>
+              </div>
+              <div>
+                <h4 class="font-semibold mb-2">🚊 By Train</h4>
+                <p class="prose" style="font-size: 1.125rem; line-height: 1.7;">Penn Station and Grand Central Terminal are the major rail hubs, with Amtrak and regional trains.</p>
+              </div>
+              <div>
+                <h4 class="font-semibold mb-2">🚗 By Car</h4>
+                <p class="prose" style="font-size: 1.125rem; line-height: 1.7;">Parking in NYC is expensive ($40-60/day). We recommend using public transportation once in the city.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Where to Stay -->
+          <div class="event-card" style="background-color: #FAF8F3;">
+            <h3 class="text-2xl font-bold mb-6" style="font-family: 'Playfair Display', serif; color: #D4A574;">Where to Stay</h3>
+            <div class="space-y-4">
+              <p class="prose font-medium" style="font-size: 1.125rem; line-height: 1.7;">Room blocks available at:</p>
+              <ul class="space-y-2" style="font-size: 1.125rem; line-height: 1.7;">
+                <li>🏨 <strong>The Plaza Hotel</strong> (Wedding Venue) - Use code TANVINCE2025</li>
+                <li>🏨 <strong>The Jane Hotel</strong> - Budget-friendly option in West Village</li>
+                <li>🏨 <strong>1 Hotel Brooklyn Bridge</strong> - Eco-luxury with skyline views</li>
+              </ul>
+              <p class="prose mt-4" style="font-size: 1.125rem; line-height: 1.7;">Neighborhoods to consider: Midtown (near venues), Brooklyn (hipster vibes), or Lower Manhattan (great restaurants).</p>
+            </div>
+          </div>
+
+          <!-- NYC Tips -->
+          <div class="event-card" style="background-color: #FAF8F3;">
+            <h3 class="text-2xl font-bold mb-6" style="font-family: 'Playfair Display', serif; color: #D4A574;">NYC Tips</h3>
+            <div class="space-y-4">
+              <div>
+                <h4 class="font-semibold mb-2">🗺️ Getting Around</h4>
+                <p class="prose" style="font-size: 1.125rem; line-height: 1.7;">Download Citymapper for subway navigation. Get a MetroCard at any subway station ($2.90 per ride).</p>
+              </div>
+              <div>
+                <h4 class="font-semibold mb-2">🍽️ Dining</h4>
+                <p class="prose" style="font-size: 1.125rem; line-height: 1.7;">Tipping: 18-20% at restaurants, $1-2 per drink at bars. Try Joe's Pizza, Russ & Daughters, and Din Tai Fung.</p>
+              </div>
+              <div>
+                <h4 class="font-semibold mb-2">☀️ Weather</h4>
+                <p class="prose" style="font-size: 1.125rem; line-height: 1.7;">May weather: 60-75°F (15-24°C), pack layers!</p>
+              </div>
+              <div>
+                <h4 class="font-semibold mb-2">🎭 Must-See</h4>
+                <p class="prose" style="font-size: 1.125rem; line-height: 1.7;">Central Park, Brooklyn Bridge, The Met, Broadway shows, and Top of the Rock for skyline views.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Eat & Drink and Things to Do Section -->
+        <div class="max-w-screen-2xl mx-auto px-12 mt-16">
+          <div class="eat-drink-grid grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Eat & Drink -->
+            <div class="event-card" style="background-color: #FAF8F3;">
+              <h3 class="text-2xl font-bold mb-6" style="font-family: 'Playfair Display', serif; color: #D4A574;">Eat & Drink</h3>
+              <ul class="space-y-2" style="font-size: 1.125rem; line-height: 1.7;">
+                <li>🥯 <strong>Russ & Daughters</strong> - Classic NYC bagels</li>
+                <li>🍕 <strong>Joe's Pizza</strong> - Iconic NY slice</li>
+                <li>🍜 <strong>Ippudo</strong> - Amazing ramen</li>
+                <li>🥟 <strong>Din Tai Fung</strong> - Soup dumplings</li>
+                <li>☕ <strong>Levain Bakery</strong> - Best cookies in NYC</li>
+                <li>🍸 <strong>Death & Co</strong> - Craft cocktails</li>
+                <li>🌮 <strong>Los Tacos No. 1</strong> - Authentic tacos</li>
+              </ul>
+            </div>
+
+            <!-- Things to Do -->
+            <div class="event-card" style="background-color: #FAF8F3;">
+              <h3 class="text-2xl font-bold mb-6" style="font-family: 'Playfair Display', serif; color: #D4A574;">Things to Do</h3>
+              <ul class="space-y-2" style="font-size: 1.125rem; line-height: 1.7;">
+                <li>🗽 <strong>Statue of Liberty</strong> - Book tickets in advance</li>
+                <li>🌳 <strong>Central Park</strong> - Perfect for a morning stroll</li>
+                <li>🎭 <strong>Broadway Show</strong> - Book tickets on Broadway.com</li>
+                <li>🏛️ <strong>The Met</strong> - World-class art museum</li>
+                <li>🌉 <strong>Brooklyn Bridge</strong> - Walk or bike across</li>
+                <li>🏙️ <strong>Top of the Rock</strong> - Best skyline views</li>
+                <li>🛍️ <strong>SoHo</strong> - Shopping and galleries</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RSVP Section -->
+  <section class="rsvp-section py-20" style="background-color: #E5E1D9;">
+    <div class="flex items-center justify-center px-12">
+      <div class="max-w-6xl w-full flex flex-col">
+        <!-- Video Card -->
+        <div class="event-card" style="padding: 0; overflow: hidden; height: 400px;">
+          <video autoplay loop muted playsinline class="w-full h-full object-cover">
+            <source src="images/design.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+
+        <!-- RSVP Button -->
+        <div class="text-center mt-12">
+          <a href="index.html#rsvp" class="nav-square">
+            RSVP
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-8" style="background-color: #2C2825;">
+    <div class="max-w-5xl mx-auto px-6 text-center" style="color: #E5E1D9;">
+      <h3 class="text-xl font-semibold mb-2" style="font-family: 'Playfair Display', serif;">Tanaz & Vince</h3>
+      <p class="mb-4 text-sm">April 30 - May 2, 2026 • New York</p>
+    </div>
+  </footer>
+</body>
+</html>
