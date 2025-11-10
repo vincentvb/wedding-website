@@ -148,10 +148,289 @@
       }
     }
 
+    /* Hamburger Menu Styles */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      padding: 1rem;
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 999;
+      background-color: rgba(229, 225, 217, 0.9);
+      border-radius: 0.5rem;
+    }
+
+    .hamburger span {
+      width: 35px;
+      height: 4px;
+      background-color: #524742;
+      margin: 4px 0;
+      transition: 0.3s;
+      border-radius: 2px;
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(229, 225, 217, 0.98);
+      z-index: 1000;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(2rem, 5vh, 4rem);
+      padding: 2rem 1.5rem;
+    }
+
+    .mobile-menu.active {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      font-size: clamp(2rem, 6vw, 3.5rem) !important;
+      font-weight: 500 !important;
+    }
+
+    .mobile-menu .nav-square {
+      font-size: clamp(1.75rem, 5vw, 3rem) !important;
+      padding: clamp(0.75rem, 2vh, 1.5rem) clamp(1.5rem, 5vw, 3.5rem) !important;
+      margin-top: clamp(0.5rem, 2vh, 1.5rem);
+    }
+
+    .close-menu {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      font-size: clamp(3rem, 8vw, 5rem) !important;
+      cursor: pointer;
+      color: #524742;
+      font-weight: 300;
+      line-height: 1;
+    }
+
     @media (max-width: 768px) {
+      /* Mobile navigation */
+      .hamburger {
+        display: flex !important;
+      }
+
+      /* Force large text in mobile menu */
+      .mobile-menu a.nav-link {
+        font-size: clamp(2rem, 6vw, 3.5rem) !important;
+      }
+
+      .mobile-menu a.nav-square {
+        font-size: clamp(1.75rem, 5vw, 3rem) !important;
+      }
+
+      /* Adjust for very small screens */
+      @media (max-height: 700px) {
+        .mobile-menu {
+          gap: 1.5rem !important;
+        }
+
+        .mobile-menu a {
+          font-size: 2rem !important;
+        }
+
+        .mobile-menu .nav-square {
+          font-size: 1.75rem !important;
+          padding: 0.75rem 1.5rem !important;
+          margin-top: 0.5rem !important;
+        }
+
+        .close-menu {
+          font-size: 3rem !important;
+        }
+      }
+
+      nav {
+        display: none !important;
+      }
+
+      /* Hero section padding */
+      section.pt-16 {
+        padding-top: 2rem !important;
+        padding-bottom: 2rem !important;
+      }
+
+      section.pt-16 .max-w-7xl {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+      }
+
+      .hero-text {
+        font-size: 2rem !important;
+      }
+
+      /* Bride/Groom Section Reordering - Stack vertically in specific order */
+      .bride-groom-grid {
+        display: flex !important;
+        flex-direction: column !important;
+      }
+
+      /* First grid (Tanaz): Photo first, then text */
+      .bride-groom-grid:nth-of-type(1) > div:nth-child(1) {
+        order: 1;
+      }
+
+      .bride-groom-grid:nth-of-type(1) > div:nth-child(2) {
+        order: 2;
+      }
+
+      /* Second grid (Vince): Text is child 1, photo is child 2 - reverse them */
+      .bride-groom-grid:nth-of-type(2) > div:nth-child(1) {
+        order: 4;  /* Vince text */
+      }
+
+      .bride-groom-grid:nth-of-type(2) > div:nth-child(2) {
+        order: 3;  /* Vince photo */
+      }
+
+      .bride-groom-section {
+        width: 100% !important;
+        padding: 2rem 1.5rem !important;
+      }
+
+      /* Cast and Crew Grid - Stack vertically with photos first */
+      .cast-grid {
+        display: flex !important;
+        flex-direction: column !important;
+      }
+
+      /* Row 1: Holly photo, Holly text, Justin photo, Justin text */
+      .cast-grid > div:nth-child(1) { order: 1; }  /* Holly photo */
+      .cast-grid > div:nth-child(2) { order: 2; }  /* Holly text */
+      .cast-grid > div:nth-child(3) { order: 3; }  /* Justin photo */
+      .cast-grid > div:nth-child(4) { order: 4; }  /* Justin text */
+
+      /* Row 2: Shirley Liu photo, Shirley Liu text, Shirley Ng photo, Shirley Ng text */
+      .cast-grid > div:nth-child(5) { order: 6; }  /* Shirley Liu text -> move after photo */
+      .cast-grid > div:nth-child(6) { order: 5; }  /* Shirley Liu photo -> move before text */
+      .cast-grid > div:nth-child(7) { order: 8; }  /* Shirley Ng text -> move after photo */
+      .cast-grid > div:nth-child(8) { order: 7; }  /* Shirley Ng photo -> move before text */
+
+      /* Row 3 */
+      .cast-grid > div:nth-child(9) { order: 9; }   /* Photo */
+      .cast-grid > div:nth-child(10) { order: 10; } /* Text */
+      .cast-grid > div:nth-child(11) { order: 11; } /* Photo */
+      .cast-grid > div:nth-child(12) { order: 12; } /* Text */
+
+      /* Row 4 */
+      .cast-grid > div:nth-child(13) { order: 14; } /* Text -> move after photo */
+      .cast-grid > div:nth-child(14) { order: 13; } /* Photo -> move before text */
+      .cast-grid > div:nth-child(15) { order: 16; } /* Text -> move after photo */
+      .cast-grid > div:nth-child(16) { order: 15; } /* Photo -> move before text */
+
+      /* Row 5 */
+      .cast-grid > div:nth-child(17) { order: 17; } /* Photo */
+      .cast-grid > div:nth-child(18) { order: 18; } /* Text */
+      .cast-grid > div:nth-child(19) { order: 19; } /* Photo */
+      .cast-grid > div:nth-child(20) { order: 20; } /* Text */
+
+      .cast-grid > div {
+        width: 100% !important;
+      }
+
+      /* RSVP Section - match home page */
+      .rsvp-section {
+        min-height: auto !important;
+        padding: 1.5rem 0 0 0 !important;
+      }
+
       .rsvp-section .px-12 {
         padding-left: 1rem !important;
         padding-right: 1rem !important;
+        padding-bottom: 0 !important;
+      }
+
+      .rsvp-section .flex.items-center.justify-center {
+        padding-bottom: 0 !important;
+      }
+
+      .rsvp-section .event-card {
+        height: 250px !important;
+      }
+
+      .rsvp-section .text-center.mt-12 {
+        margin-top: 1.5rem !important;
+        margin-bottom: 0 !important;
+        padding-bottom: 1.5rem !important;
+      }
+
+      /* Footer - remove all padding on mobile */
+      footer {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100vw !important;
+        position: relative;
+        left: 0;
+        right: 0;
+      }
+
+      footer .max-w-5xl {
+        max-width: 100% !important;
+        padding: 1.5rem 0 !important;
+        margin: 0 !important;
+      }
+    }
+
+    /* Extra small mobile devices */
+    @media (max-width: 480px) {
+      nav .flex.items-center.gap-8 {
+        gap: 0.25rem !important;
+      }
+
+      .nav-link {
+        font-size: 0.75rem !important;
+        padding: 0.25rem !important;
+      }
+
+      .nav-square {
+        padding: 0.5rem 1rem !important;
+        font-size: 0.75rem !important;
+      }
+
+      .hero-text {
+        font-size: 1.5rem !important;
+      }
+
+      .bride-groom-section h2 {
+        font-size: 2rem !important;
+      }
+
+      .bride-groom-section h3 {
+        font-size: 1rem !important;
+      }
+
+      .bride-groom-section .prose {
+        font-size: 0.875rem !important;
+      }
+
+      .bride-groom-section {
+        padding: 1.5rem !important;
+      }
+
+      .cast-grid h3 {
+        font-size: 1.125rem !important;
+      }
+
+      .cast-grid p {
+        font-size: 0.75rem !important;
+      }
+
+      /* RSVP video for very small screens */
+      .rsvp-section .event-card {
+        height: 200px !important;
+      }
+
+      .rsvp-section .text-center.mt-12 {
+        padding-bottom: 1rem !important;
       }
     }
   </style>
@@ -160,9 +439,31 @@
     if (sessionStorage.getItem('authenticated') !== 'true') {
       window.location.href = 'password.html';
     }
+
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('active');
+    }
   </script>
 </head>
 <body>
+
+  <!-- Hamburger Menu Button -->
+  <div class="hamburger" onclick="toggleMobileMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu" id="mobileMenu">
+    <span class="close-menu" onclick="toggleMobileMenu()">&times;</span>
+    <a href="index.html" class="nav-link" onclick="toggleMobileMenu()">Home</a>
+    <a href="cast.html" class="nav-link" onclick="toggleMobileMenu()">Cast</a>
+    <a href="event.html" class="nav-link" onclick="toggleMobileMenu()">Event Details</a>
+    <a href="https://withjoy.com/tanaz-and-vincent/registry" target="_blank" rel="noreferrer" class="nav-link" onclick="toggleMobileMenu()">Registry</a>
+    <a href="index.html#rsvp" class="nav-square" onclick="toggleMobileMenu()">RSVP</a>
+  </div>
 
   <!-- Navigation Bar -->
   <nav class="bg-white/95 backdrop-blur-sm shadow-sm">
@@ -180,7 +481,7 @@
   </nav>
 
   <!-- Hero Section with Title -->
-  <section class="pt-16 pb-16" style="background-color: #E5E1D9;">
+  <section class="pt-8 pb-8" style="background-color: #E5E1D9;">
     <div class="max-w-7xl mx-auto px-6 text-center">
       <h1 class="hero-text">The Leads</h1>
     </div>
@@ -224,7 +525,7 @@
   </section>
 
   <!-- Supporting Cast Header -->
-  <section class="py-16" style="background-color: #E5E1D9;">
+  <section class="py-8" style="background-color: #E5E1D9;">
     <div class="max-w-7xl mx-auto px-6 text-center">
       <h2 class="hero-text">Cast and Crew</h2>
     </div>
@@ -361,7 +662,7 @@
   <footer class="py-8" style="background-color: #2C2825;">
     <div class="max-w-5xl mx-auto px-6 text-center" style="color: #E5E1D9;">
       <h3 class="text-xl font-semibold mb-2" style="font-family: 'Playfair Display', serif;">Tanaz & Vince</h3>
-      <p class="mb-4 text-sm">April 30 - May 2, 2025 • New York</p>
+      <p class="mb-4 text-sm">April 30 - May 2, 2026 • New York</p>
     </div>
   </footer>
 </body>

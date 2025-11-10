@@ -236,14 +236,311 @@
       }
     }
 
+    /* Hamburger Menu Styles */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      padding: 1rem;
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 999;
+      background-color: rgba(229, 225, 217, 0.9);
+      border-radius: 0.5rem;
+    }
+
+    .hamburger span {
+      width: 35px;
+      height: 4px;
+      background-color: #524742;
+      margin: 4px 0;
+      transition: 0.3s;
+      border-radius: 2px;
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(229, 225, 217, 0.98);
+      z-index: 1000;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(2rem, 5vh, 4rem);
+      padding: 2rem 1.5rem;
+    }
+
+    .mobile-menu.active {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      font-size: clamp(2rem, 6vw, 3.5rem) !important;
+      font-weight: 500 !important;
+    }
+
+    .mobile-menu .nav-square {
+      font-size: clamp(1.75rem, 5vw, 3rem) !important;
+      padding: clamp(0.75rem, 2vh, 1.5rem) clamp(1.5rem, 5vw, 3.5rem) !important;
+      margin-top: clamp(0.5rem, 2vh, 1.5rem);
+    }
+
+    .close-menu {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      font-size: clamp(3rem, 8vw, 5rem) !important;
+      cursor: pointer;
+      color: #524742;
+      font-weight: 300;
+      line-height: 1;
+    }
+
     @media (max-width: 768px) {
-      .event-card video {
-        height: 250px !important;
+      /* Mobile navigation */
+      .hamburger {
+        display: flex !important;
+      }
+
+      /* Force large text in mobile menu */
+      .mobile-menu a.nav-link {
+        font-size: clamp(2rem, 6vw, 3.5rem) !important;
+      }
+
+      .mobile-menu a.nav-square {
+        font-size: clamp(1.75rem, 5vw, 3rem) !important;
+      }
+
+      /* Adjust for very small screens */
+      @media (max-height: 700px) {
+        .mobile-menu {
+          gap: 1.5rem !important;
+        }
+
+        .mobile-menu a {
+          font-size: 2rem !important;
+        }
+
+        .mobile-menu .nav-square {
+          font-size: 1.75rem !important;
+          padding: 0.75rem 1.5rem !important;
+          margin-top: 0.5rem !important;
+        }
+
+        .close-menu {
+          font-size: 3rem !important;
+        }
+      }
+
+      nav {
+        display: none !important;
+      }
+
+      /* Hero text sizing */
+      .hero-text {
+        font-size: 2rem !important;
+      }
+
+      /* Event cards - exclude RSVP video card */
+      .event-card:not(.rsvp-section .event-card) {
+        padding: 1.25rem !important;
+      }
+
+      .event-card h3 {
+        font-size: 1.5rem !important;
+      }
+
+      .event-card h4 {
+        font-size: 1rem !important;
+      }
+
+      .event-card p,
+      .event-card ul li {
+        font-size: 0.9375rem !important;
+      }
+
+      /* FAQ cards */
+      .faq-grid .bg-white {
+        padding: 1rem !important;
+      }
+
+      .faq-grid h4 {
+        font-size: 1.125rem !important;
+      }
+
+      .faq-grid p {
+        font-size: 0.9375rem !important;
+      }
+
+      /* Carousel intro text */
+      .event-section .prose {
+        font-size: 1rem !important;
+      }
+
+      /* First section - remove full screen behavior on mobile */
+      .full-screen.event-section {
+        min-height: auto !important;
+        padding-top: 1.5rem !important;
+        padding-bottom: 2rem !important;
+      }
+
+      .full-screen.event-section .text-center.mb-12 {
+        margin-bottom: 1.5rem !important;
+      }
+
+      /* RSVP Section - match home page */
+      .rsvp-section {
+        min-height: auto !important;
+        padding: 1.5rem 0 0 0 !important;
       }
 
       .rsvp-section .px-12 {
         padding-left: 1rem !important;
         padding-right: 1rem !important;
+        padding-bottom: 0 !important;
+      }
+
+      .rsvp-section .flex.items-center.justify-center {
+        padding-bottom: 0 !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+
+      .rsvp-section .max-w-6xl {
+        max-width: 100% !important;
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+      }
+
+      .rsvp-section .event-card {
+        height: 250px !important;
+        border-radius: 0.5rem !important;
+        padding: 0 !important;
+        overflow: hidden !important;
+      }
+
+      .rsvp-section .event-card video {
+        object-fit: cover !important;
+        object-position: center center !important;
+        width: 100% !important;
+        height: 100% !important;
+        display: block !important;
+      }
+
+      .rsvp-section .text-center.mt-12 {
+        margin-top: 1.5rem !important;
+        margin-bottom: 0 !important;
+        padding-bottom: 1.5rem !important;
+      }
+
+      /* Footer - remove all padding on mobile */
+      footer {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100vw !important;
+        position: relative;
+        left: 0;
+        right: 0;
+      }
+
+      footer .max-w-5xl {
+        max-width: 100% !important;
+        padding: 1.5rem 0 !important;
+        margin: 0 !important;
+      }
+    }
+
+    /* Extra small mobile devices */
+    @media (max-width: 480px) {
+      nav .flex.items-center.gap-8 {
+        gap: 0.25rem !important;
+      }
+
+      .nav-link {
+        font-size: 0.75rem !important;
+        padding: 0.25rem !important;
+      }
+
+      .nav-square {
+        padding: 0.5rem 1rem !important;
+        font-size: 0.75rem !important;
+      }
+
+      .hero-text {
+        font-size: 1.5rem !important;
+      }
+
+      .section-title {
+        font-size: 1.25rem !important;
+      }
+
+      /* First section - tighter spacing on very small screens */
+      .full-screen.event-section {
+        padding-top: 1rem !important;
+        padding-bottom: 1.5rem !important;
+      }
+
+      .full-screen.event-section .text-center.mb-12 {
+        margin-bottom: 1rem !important;
+      }
+
+      .event-card:not(.rsvp-section .event-card) {
+        padding: 1rem !important;
+      }
+
+      .event-card h3 {
+        font-size: 1.25rem !important;
+      }
+
+      .event-card h4 {
+        font-size: 0.875rem !important;
+      }
+
+      .event-card p,
+      .event-card ul li {
+        font-size: 0.875rem !important;
+      }
+
+      .carousel-item {
+        width: 150px !important;
+        height: 200px !important;
+      }
+
+      @keyframes scroll {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(calc(-166px * 17)); }
+      }
+
+      .faq-grid h4 {
+        font-size: 1rem !important;
+      }
+
+      .faq-grid p {
+        font-size: 0.875rem !important;
+      }
+
+      /* RSVP video for very small screens */
+      .rsvp-section .event-card {
+        height: 200px !important;
+        padding: 0 !important;
+        overflow: hidden !important;
+      }
+
+      .rsvp-section .event-card video {
+        object-fit: cover !important;
+        object-position: center center !important;
+        width: 100% !important;
+        height: 100% !important;
+        display: block !important;
+      }
+
+      .rsvp-section .text-center.mt-12 {
+        padding-bottom: 1rem !important;
       }
     }
   </style>
@@ -266,9 +563,31 @@
         });
       }
     });
+
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('active');
+    }
   </script>
 </head>
 <body>
+
+  <!-- Hamburger Menu Button -->
+  <div class="hamburger" onclick="toggleMobileMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu" id="mobileMenu">
+    <span class="close-menu" onclick="toggleMobileMenu()">&times;</span>
+    <a href="index.html" class="nav-link" onclick="toggleMobileMenu()">Home</a>
+    <a href="cast.html" class="nav-link" onclick="toggleMobileMenu()">Cast</a>
+    <a href="event.html" class="nav-link" onclick="toggleMobileMenu()">Event Details</a>
+    <a href="https://withjoy.com/tanaz-and-vincent/registry" target="_blank" rel="noreferrer" class="nav-link" onclick="toggleMobileMenu()">Registry</a>
+    <a href="index.html#rsvp" class="nav-square" onclick="toggleMobileMenu()">RSVP</a>
+  </div>
 
   <!-- Navigation Bar -->
   <nav class="bg-white/95 backdrop-blur-sm shadow-sm">
@@ -286,7 +605,7 @@
   </nav>
 
   <!-- SECTION 1: Image Carousel & Intro -->
-  <section class="full-screen event-section" style="background-color: #E5E1D9; padding-top: 2rem; padding-bottom: 4rem;">
+  <section class="full-screen event-section" style="background-color: #E5E1D9; padding-top: 2rem; padding-bottom: 0;">
     <div class="w-full max-w-screen-2xl mx-auto px-12">
       <div class="text-center mb-12">
         <h1 class="hero-text mb-4">Tanaz & Vince</h1>
@@ -320,7 +639,7 @@
   </section>
 
   <!-- SECTION 2: Three Day Event Cards -->
-  <section class="full-screen event-section" style="background-color: #F5EDDC; padding-top: 4rem; padding-bottom: 4rem;">
+  <section class="full-screen event-section" style="background-color: #F5EDDC; padding-top: 4rem; padding-bottom: 0;">
     <div class="w-full max-w-screen-2xl mx-auto px-12">
       <h2 class="section-title text-center mb-12">Three Days of Celebration</h2>
 
@@ -415,7 +734,7 @@
   </section>
 
   <!-- SECTION 3: NYC Information & Footer -->
-  <section class="event-section" style="background-color: #E5E1D9; padding-top: 4rem; padding-bottom: 4rem;">
+  <section class="event-section" style="background-color: #E5E1D9; padding-top: 4rem; padding-bottom: 0;">
     <div class="w-full">
         <div class="max-w-screen-2xl mx-auto px-12">
           <h2 class="section-title text-center mb-12">Visiting New York City</h2>
@@ -586,7 +905,7 @@
   <footer class="py-8" style="background-color: #2C2825;">
     <div class="max-w-5xl mx-auto px-6 text-center" style="color: #E5E1D9;">
       <h3 class="text-xl font-semibold mb-2" style="font-family: 'Playfair Display', serif;">Tanaz & Vince</h3>
-      <p class="mb-4 text-sm">April 30 - May 2, 2025 • New York</p>
+      <p class="mb-4 text-sm">April 30 - May 2, 2026 • New York</p>
     </div>
   </footer>
 

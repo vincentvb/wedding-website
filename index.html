@@ -14,10 +14,46 @@
       align-items: center;
     }
 
+    /* Remove full-screen behavior from story section */
+    .story-section.full-screen {
+      min-height: auto !important;
+      display: block !important;
+    }
+
+    /* Reduce story section padding on all screen sizes */
+    .story-section .px-8.py-12 {
+      padding-top: 2rem !important;
+      padding-bottom: 2rem !important;
+      min-height: auto !important;
+      align-items: flex-start !important;
+    }
+
+    /* Reduce Pop Quiz card height */
+    .quiz-section .trivia-inner {
+      height: 180px !important;
+    }
+
+    /* Remove full-screen behavior from quiz section */
+    .quiz-section.full-screen {
+      min-height: auto !important;
+      display: block !important;
+    }
+
+    /* Remove full-screen behavior from RSVP section */
+    .rsvp-section.full-screen {
+      min-height: auto !important;
+      display: block !important;
+    }
+
     /* Responsive adjustments for smaller desktop screens */
     @media (max-width: 1440px) {
-      .hero-section .w-1\/2 {
-        width: 50%;
+      /* Give more space to the image on smaller screens */
+      .hero-section .w-1\/2:first-child {
+        width: 55% !important;
+      }
+
+      .hero-section .w-1\/2:last-child {
+        width: 45% !important;
       }
 
       .hero-content {
@@ -31,6 +67,15 @@
     }
 
     @media (max-width: 1280px) {
+      /* Give even more space to the image on smaller screens */
+      .hero-section .w-1\/2:first-child {
+        width: 58% !important;
+      }
+
+      .hero-section .w-1\/2:last-child {
+        width: 42% !important;
+      }
+
       .hero-text-custom {
         font-size: clamp(2.5rem, 5vw, 4rem) !important;
       }
@@ -48,6 +93,15 @@
     }
 
     @media (max-width: 1024px) {
+      /* Give even more space to the image on smaller screens */
+      .hero-section .w-1\/2:first-child {
+        width: 60% !important;
+      }
+
+      .hero-section .w-1\/2:last-child {
+        width: 40% !important;
+      }
+
       .hero-text-custom {
         font-size: clamp(2rem, 4vw, 3rem) !important;
       }
@@ -93,24 +147,457 @@
       }
     }
 
-    /* Ensure sections don't overlap */
-    @media (max-width: 1440px) {
-      .full-screen {
-        min-height: 100vh;
+    /* Hamburger Menu Styles */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      padding: 0.75rem;
+      position: fixed !important;
+      top: 0.75rem;
+      right: 0.75rem;
+      z-index: 999;
+      background-color: rgba(229, 225, 217, 0.95);
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      margin: 0 !important;
+    }
+
+    .hamburger span {
+      width: 35px;
+      height: 4px;
+      background-color: #524742;
+      margin: 4px 0;
+      transition: 0.3s;
+      border-radius: 2px;
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(229, 225, 217, 0.98);
+      z-index: 1000;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(2rem, 5vh, 4rem);
+      padding: 2rem 1.5rem;
+    }
+
+    .mobile-menu.active {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      font-size: clamp(2rem, 6vw, 3.5rem) !important;
+      font-weight: 500 !important;
+    }
+
+    .mobile-menu .nav-square {
+      font-size: clamp(1.75rem, 5vw, 3rem) !important;
+      padding: clamp(0.75rem, 2vh, 1.5rem) clamp(1.5rem, 5vw, 3.5rem) !important;
+      margin-top: clamp(0.5rem, 2vh, 1.5rem);
+    }
+
+    .close-menu {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      font-size: clamp(3rem, 8vw, 5rem) !important;
+      cursor: pointer;
+      color: #524742;
+      font-weight: 300;
+      line-height: 1;
+    }
+
+    /* Mobile Responsive Styles */
+    @media (max-width: 768px) {
+      /* Remove all top spacing on mobile */
+      html {
+        margin: 0 !important;
+        padding: 0 !important;
       }
 
-      section.hero-section > div {
-        min-height: 100vh;
+      body {
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow-x: hidden;
       }
 
-      /* Allow story section to be taller if needed */
-      .story-section > div {
-        min-height: 100vh;
-        height: auto;
+      /* Ensure hamburger doesn't create space */
+      .hamburger {
+        position: fixed !important;
+      }
+
+      .mobile-menu {
+        position: fixed !important;
+      }
+
+      /* Remove full-screen behavior from hero on mobile */
+      section.hero-section.full-screen {
+        min-height: auto !important;
+        display: block !important;
+        align-items: flex-start !important;
+      }
+
+      /* First section should start at top */
+      section.hero-section {
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      /* Show hamburger on mobile */
+      .hamburger {
+        display: flex !important;
+      }
+
+      /* Force large text in mobile menu */
+      .mobile-menu a.nav-link {
+        font-size: clamp(2rem, 6vw, 3.5rem) !important;
+      }
+
+      .mobile-menu a.nav-square {
+        font-size: clamp(1.75rem, 5vw, 3rem) !important;
+      }
+
+      /* Adjust for very small screens */
+      @media (max-height: 700px) {
+        .mobile-menu {
+          gap: 1.5rem !important;
+        }
+
+        .mobile-menu a {
+          font-size: 2rem !important;
+        }
+
+        .mobile-menu .nav-square {
+          font-size: 1.75rem !important;
+          padding: 0.75rem 1.5rem !important;
+          margin-top: 0.5rem !important;
+        }
+
+        .close-menu {
+          font-size: 3rem !important;
+        }
+      }
+
+      /* Hero Section - Use grid to reorder: nav, photo, content */
+      section.hero-section {
+        padding: 0 !important;
+        margin: 0 !important;
+        position: relative;
+        top: 0;
+      }
+
+      .hero-section .w-full.h-screen.flex {
+        display: grid !important;
+        grid-template-rows: auto auto;
+        height: auto !important;
+        min-height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      /* Make right column transparent so its children become grid items */
+      .hero-section .w-1\/2.flex.flex-col {
+        display: contents;
+      }
+
+      /* Photo column - now first since nav is hidden */
+      .hero-section .w-1\/2.h-full:first-child {
+        width: 100vw !important;
+        height: 70vh !important;
+        min-height: 500px !important;
+        grid-row: 1 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        position: relative;
+        top: 0;
+        left: 0;
+      }
+
+      .hero-section .w-1\/2.h-full:first-child img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      /* Navigation - first in visual order */
+      nav.hero-nav {
+        grid-row: 1;
+        width: 100%;
+      }
+
+      /* Hero content - second in visual order (after photo) */
+      .hero-content {
+        grid-row: 2 !important;
+        width: 100%;
+        display: flex !important;
+        align-items: flex-start !important;
+        padding-top: 1.5rem !important;
+      }
+
+      /* Hide entire nav bar on mobile */
+      nav.hero-nav {
+        display: none !important;
+      }
+
+      /* Show hamburger on mobile */
+      .hamburger {
+        display: flex !important;
+      }
+
+      /* Hero content adjustments */
+      .hero-content {
+        padding: 1.5rem 1.5rem 2rem !important;
+        justify-content: flex-start !important;
+      }
+
+      .hero-content .space-y-8 {
+        margin-top: 0 !important;
+      }
+
+      .hero-content .ml-12 {
+        margin-left: 0 !important;
+      }
+
+      .hero-content .space-y-8 {
+        max-width: 100% !important;
+      }
+
+      .hero-text-custom {
+        font-size: 2rem !important;
+      }
+
+      /* Story Section */
+      .story-section .flex.gap-8 {
+        flex-direction: column !important;
       }
 
       .story-section {
-        padding: 3rem 0;
+        padding: 0 !important;
+      }
+
+      .story-section > div {
+        padding: 1rem !important;
+      }
+
+      .story-section > div.px-8.py-12 {
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
+      }
+
+      .story-section .event-card {
+        padding: 1.5rem !important;
+      }
+
+      /* Quiz Section */
+      .quiz-section {
+        padding: 1rem !important;
+      }
+
+      .quiz-section > div {
+        padding: 1rem !important;
+      }
+
+      .quiz-section .event-card {
+        padding: 1.5rem !important;
+        margin-bottom: 1.5rem !important;
+      }
+
+      .quiz-section .grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+      }
+
+      .quiz-section .trivia-inner {
+        height: 220px !important;
+      }
+
+      .quiz-section .text-2xl {
+        font-size: 1.125rem !important;
+      }
+
+      /* RSVP Section */
+      .rsvp-section {
+        min-height: auto !important;
+        padding: 1.5rem 0 0 0 !important;
+      }
+
+      .rsvp-section .event-card {
+        height: 250px !important;
+      }
+
+      .rsvp-section .px-12 {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+        padding-bottom: 0 !important;
+      }
+
+      .rsvp-section .flex.items-center.justify-center {
+        padding-bottom: 0 !important;
+      }
+
+      .rsvp-section .text-center.mt-12 {
+        margin-top: 1.5rem !important;
+        margin-bottom: 0 !important;
+        padding-bottom: 1.5rem !important;
+      }
+
+      .rsvp-section > div {
+        padding: 0 1rem !important;
+      }
+
+      .rsvp-section > div > div {
+        padding: 0 1rem !important;
+      }
+
+      .rsvp-section .flex-1 {
+        flex: 0 !important;
+      }
+
+      .rsvp-section .min-h-screen {
+        min-height: auto !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+
+      .rsvp-section .text-center.mt-12 {
+        margin-top: 1.5rem !important;
+      }
+
+      .rsvp-section .flex.items-center.justify-center {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+      }
+
+      /* Remove padding from RSVP section wrapper */
+      #rsvp > div {
+        padding-bottom: 0 !important;
+      }
+
+      /* Footer - remove all padding on mobile */
+      footer {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100vw !important;
+        position: relative;
+        left: 0;
+        right: 0;
+      }
+
+      footer .max-w-5xl {
+        max-width: 100% !important;
+        padding: 1.5rem 0 !important;
+        margin: 0 !important;
+      }
+
+      /* Marquee images */
+      .marquee__image {
+        height: 20rem !important;
+      }
+
+      /* General mobile adjustments */
+      .section-title {
+        font-size: 1.5rem !important;
+      }
+
+      .prose {
+        font-size: 1rem !important;
+      }
+
+      /* Full screen sections should not enforce 100vh on mobile */
+      .full-screen {
+        min-height: auto !important;
+      }
+    }
+
+    /* Extra small mobile devices */
+    @media (max-width: 480px) {
+      nav.hero-nav {
+        gap: 0.25rem !important;
+      }
+
+      .nav-link {
+        font-size: 0.75rem !important;
+        padding: 0.25rem !important;
+      }
+
+      .nav-square {
+        padding: 0.5rem 1rem !important;
+        font-size: 0.75rem !important;
+      }
+
+      .hero-text-custom {
+        font-size: 1.5rem !important;
+      }
+
+      .hero-subtext {
+        font-size: 1rem !important;
+      }
+
+      .story-section .event-card {
+        padding: 1rem !important;
+      }
+
+      .quiz-section .trivia-inner {
+        height: 180px !important;
+      }
+
+      .quiz-section .text-2xl {
+        font-size: 1rem !important;
+      }
+
+      .rsvp-section .event-card {
+        height: 200px !important;
+      }
+    }
+
+    /* Ensure sections don't overlap */
+    @media (max-width: 1440px) {
+      /* Keep hero at full screen height */
+      section.hero-section {
+        min-height: 100vh !important;
+      }
+
+      section.hero-section > div {
+        min-height: 100vh !important;
+        height: 100vh !important;
+      }
+
+      /* But don't force full height on story section */
+      .story-section.full-screen {
+        min-height: auto !important;
+      }
+
+      .story-section > div {
+        min-height: auto !important;
+        height: auto !important;
+        padding-top: 2rem !important;
+        padding-bottom: 2rem !important;
+      }
+
+      .story-section {
+        padding: 0 !important;
+      }
+
+      /* Remove the large py-12 padding on smaller screens */
+      .story-section .px-8.py-12 {
+        padding-top: 2rem !important;
+        padding-bottom: 2rem !important;
+      }
+
+      /* Don't force full height on quiz and other sections */
+      .quiz-section.full-screen,
+      .rsvp-section.full-screen {
+        min-height: auto !important;
       }
     }
 
@@ -152,9 +639,31 @@
       if (flippedState[i]) card.classList.add('flipped');
       else card.classList.remove('flipped');
     }
+
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('active');
+    }
   </script>
 </head>
 <body>
+
+  <!-- Hamburger Menu Button -->
+  <div class="hamburger" onclick="toggleMobileMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu" id="mobileMenu">
+    <span class="close-menu" onclick="toggleMobileMenu()">&times;</span>
+    <a href="index.html" class="nav-link" onclick="toggleMobileMenu()">Home</a>
+    <a href="cast.html" class="nav-link" onclick="toggleMobileMenu()">Cast</a>
+    <a href="event.html" class="nav-link" onclick="toggleMobileMenu()">Event Details</a>
+    <a href="https://withjoy.com/tanaz-and-vincent/registry" target="_blank" rel="noreferrer" class="nav-link" onclick="toggleMobileMenu()">Registry</a>
+    <a href="#rsvp" class="nav-square" onclick="toggleMobileMenu()">RSVP</a>
+  </div>
 
   <!-- SECTION 1: Hero with two columns -->
   <section class="full-screen hero-section" style="background-color: #E5E1D9;">
@@ -209,9 +718,6 @@
               When he proposed, I realized that somewhere along the way, my best friend had become the love of my life. I can't wait to start this new chapter with him.
             </p>
           </div>
-          <div class="w-full bg-gray-300 rounded-lg flex items-center justify-center" style="height: 250px;">
-            <span class="text-gray-500 font-medium">Photo Placeholder</span>
-          </div>
         </div>
 
           <!-- Vincent's Story Card -->
@@ -227,9 +733,6 @@
             <p class="prose" style="font-size: 1.125rem; line-height: 1.7;">
               Proposing was the easiest decision I've ever made. She's been my best friend for over a decade, and I want to spend the rest of my life making her as happy as she makes me.
             </p>
-          </div>
-          <div class="w-full bg-gray-300 rounded-lg flex items-center justify-center" style="height: 250px;">
-            <span class="text-gray-500 font-medium">Photo Placeholder</span>
           </div>
         </div>
         </div>
@@ -322,37 +825,34 @@
     </div>
   </section>
 
-  <!-- SECTION 4: RSVP & Footer -->
-  <section id="rsvp" class="full-screen rsvp-section" style="background-color: #E5E1D9;">
-    <div class="w-full min-h-screen flex flex-col">
-      <!-- RSVP Content -->
-      <div class="flex-1 flex items-center justify-center px-12 py-12">
-        <div class="max-w-6xl w-full flex flex-col">
-          <!-- Video Card -->
-          <div class="event-card" style="padding: 0; overflow: hidden; height: 400px;">
-            <video autoplay loop muted playsinline class="w-full h-full object-cover">
-              <source src="images/design.mp4" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
-          </div>
+  <!-- SECTION 4: RSVP -->
+  <section id="rsvp" class="rsvp-section py-20" style="background-color: #E5E1D9;">
+    <div class="flex items-center justify-center px-12">
+      <div class="max-w-6xl w-full flex flex-col">
+        <!-- Video Card -->
+        <div class="event-card" style="padding: 0; overflow: hidden; height: 400px;">
+          <video autoplay loop muted playsinline class="w-full h-full object-cover">
+            <source src="images/design.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
 
-          <!-- RSVP Button -->
-          <div class="text-center mt-12">
-            <a href="#" class="nav-square">
-              RSVP
-            </a>
-          </div>
+        <!-- RSVP Button -->
+        <div class="text-center mt-12">
+          <a href="#" class="nav-square">
+            RSVP
+          </a>
         </div>
       </div>
-
-      <!-- Footer -->
-      <footer class="py-8" style="background-color: #2C2825;">
-        <div class="max-w-5xl mx-auto px-6 text-center" style="color: #E5E1D9;">
-          <h3 class="text-xl font-semibold mb-2" style="font-family: 'Playfair Display', serif;">Tanaz & Vince</h3>
-          <p class="mb-4 text-md">April 30 - May 2, 2026 • New York City</p>
-        </div>
-      </footer>
     </div>
   </section>
+
+  <!-- Footer -->
+  <footer class="py-8" style="background-color: #2C2825;">
+    <div class="max-w-5xl mx-auto px-6 text-center" style="color: #E5E1D9;">
+      <h3 class="text-xl font-semibold mb-2" style="font-family: 'Playfair Display', serif;">Tanaz & Vince</h3>
+      <p class="mb-4 text-md">April 30 - May 2, 2026 • New York City</p>
+    </div>
+  </footer>
 </body>
 </html>
