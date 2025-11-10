@@ -222,6 +222,11 @@
         padding-top: 1.5rem !important;
         padding-bottom: 1.5rem !important;
       }
+
+      /* Keep FAQ section with no top padding */
+      section.event-section:nth-of-type(3) {
+        padding-top: 0 !important;
+      }
     }
 
     /* Ensure video card scales properly */
@@ -489,6 +494,11 @@
         margin-bottom: 1rem !important;
       }
 
+      /* Keep FAQ section with no top padding */
+      section.event-section:nth-of-type(3) {
+        padding-top: 0 !important;
+      }
+
       .event-card:not(.rsvp-section .event-card) {
         padding: 1rem !important;
       }
@@ -641,7 +651,7 @@
   </section>
 
   <!-- SECTION 2: Three Day Event Cards -->
-  <section class="event-section" style="background-color: #F5EDDC; padding-top: 4rem; padding-bottom: 0;">
+  <section class="event-section" style="background-color: #F5EDDC; padding-top: 4rem; padding-bottom: 2rem;">
     <div class="w-full max-w-screen-2xl mx-auto px-12">
       <h2 class="section-title text-center mb-12">Three Days of Celebration</h2>
 
@@ -736,7 +746,7 @@
   </section>
 
   <!-- SECTION 3: FAQ Section -->
-  <section class="event-section" style="background-color: #E5E1D9; padding-top: 4rem; padding-bottom: 0;">
+  <section class="event-section" style="background-color: #E5E1D9; padding-top: 0; padding-bottom: 0;">
     <div class="w-full py-12" style="background-image: url('images/background.jpg'); background-size: cover; background-position: center;">
       <div class="max-w-screen-2xl mx-auto px-12">
         <div class="event-card text-center mb-10 mx-auto" style="max-width: 800px; padding: 2rem; background-color: #FAF8F3;">
