@@ -14,6 +14,13 @@
       align-items: center;
     }
 
+    /* Reduce space under RSVP button on desktop */
+    @media (min-width: 769px) {
+      .rsvp-section.py-20 {
+        padding-bottom: 3rem !important;
+      }
+    }
+
     /* Responsive adjustments for smaller desktop screens */
     @media (max-width: 1440px) {
       nav .max-w-screen-2xl {
@@ -28,11 +35,6 @@
       }
 
       .nav-link {
-        font-size: 1rem !important;
-      }
-
-      .nav-square {
-        padding: 0.75rem 1.5rem !important;
         font-size: 1rem !important;
       }
     }

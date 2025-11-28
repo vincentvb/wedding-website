@@ -39,10 +39,32 @@
       display: block !important;
     }
 
+    /* Quiz section header responsive width */
+    .quiz-header {
+      max-width: 1100px;
+    }
+
+    @media (max-width: 768px) {
+      .quiz-header {
+        max-width: 100% !important;
+      }
+
+      .quiz-header .section-title span {
+        white-space: normal !important;
+      }
+    }
+
     /* Remove full-screen behavior from RSVP section */
     .rsvp-section.full-screen {
       min-height: auto !important;
       display: block !important;
+    }
+
+    /* Reduce space under RSVP button on desktop */
+    @media (min-width: 769px) {
+      .rsvp-section.py-20 {
+        padding-bottom: 3rem !important;
+      }
     }
 
     /* Responsive adjustments for smaller desktop screens */
@@ -92,11 +114,6 @@
       }
 
       .nav-link {
-        font-size: 1rem !important;
-      }
-
-      .nav-square {
-        padding: 0.75rem 1.5rem !important;
         font-size: 1rem !important;
       }
     }
@@ -314,8 +331,8 @@
       /* Photo column - now first since nav is hidden */
       .hero-section .w-1\/2.h-full:first-child {
         width: 100vw !important;
-        height: 70vh !important;
-        min-height: 500px !important;
+        height: 60vh !important;
+        min-height: 400px !important;
         grid-row: 1 !important;
         margin: 0 !important;
         padding: 0 !important;
@@ -376,8 +393,21 @@
         max-width: 100% !important;
       }
 
+      .hero-content .space-y-8 > * + * {
+        margin-top: 1rem !important;
+      }
+
       .hero-text-custom {
-        font-size: 2rem !important;
+        font-size: 2.5rem !important;
+      }
+
+      .hero-subtext {
+        font-size: 1.5rem !important;
+      }
+
+      .hero-content .nav-square {
+        font-size: 1.125rem !important;
+        padding: 1rem 2rem !important;
       }
 
       /* Story Section */
@@ -394,7 +424,7 @@
       }
 
       .story-section > div.px-8.py-12 {
-        padding-top: 1rem !important;
+        padding-top: 0 !important;
         padding-bottom: 1rem !important;
       }
 
@@ -422,11 +452,19 @@
       }
 
       .quiz-section .trivia-inner {
-        height: 220px !important;
+        height: 150px !important;
       }
 
       .quiz-section .text-2xl {
-        font-size: 1.125rem !important;
+        font-size: 0.9rem !important;
+      }
+
+      .quiz-section .trivia-card {
+        font-size: 0.85rem !important;
+      }
+
+      .quiz-section .trivia-card .p-6 {
+        padding: 1rem !important;
       }
 
       /* RSVP Section */
@@ -540,11 +578,11 @@
       }
 
       .hero-text-custom {
-        font-size: 1.5rem !important;
+        font-size: 2rem !important;
       }
 
       .hero-subtext {
-        font-size: 1rem !important;
+        font-size: 1.5rem !important;
       }
 
       .story-section .event-card {
@@ -594,7 +632,7 @@
 
       /* Remove the large py-12 padding on smaller screens */
       .story-section .px-8.py-12 {
-        padding-top: 2rem !important;
+        padding-top: 1rem !important;
         padding-bottom: 2rem !important;
       }
 
@@ -692,7 +730,7 @@
             <div class="space-y-8 max-w-xl ml-12">
               <div>
                 <h1 class="hero-text hero-text-custom mb-4" style="font-size: clamp(3.5rem, 6vw, 5.5rem);">Tanaz & Vince are getting married</h1>
-                <p class="hero-subtext">April 30 - May 2</p>
+                <p class="hero-subtext">April 30 - May 2, 2026</p>
               </div>
               <div class="flex gap-4">
                 <a href="#rsvp" class="nav-square">RSVP</a>
@@ -715,13 +753,19 @@
             <h3 class="section-title mb-6" style="font-size: clamp(1.5rem, 2.5vw, 2rem);">Tanaz's Version</h3>
           <div class="space-y-4 mb-6">
             <p class="prose" style="font-size: 1.125rem; line-height: 1.7;">
-              I remember that day at the boba shop so clearly. I was nervous about hosting the club event, but there was something about this quiet freshman with two milk teas that made me smile. He seemed a little lost but determined to make friends.
+              We met at Columbia Journalism School, thrown into a group project that had something to do with advice columns. While other teams were busy being serious reporters, we were knee-deep in strangers' relationship problems. I'd read them aloud to Vince just to see what he'd say, pretending it was "research," when really I just liked hearing how his mind worked.
             </p>
             <p class="prose" style="font-size: 1.125rem; line-height: 1.7;">
-              Through college, we became friends first. I watched him grow from that shy freshman into someone confident and funny. Even during our long-distance years, he never stopped making me laugh with his random texts and terrible puns.
+              Before long, we were constantly sending each other messages on Slack. We'd be typing away during classes, until eventually the people around us started noticing just how much we were "collaborating."
             </p>
             <p class="prose" style="font-size: 1.125rem; line-height: 1.7;">
-              When he proposed, I realized that somewhere along the way, my best friend had become the love of my life. I can't wait to start this new chapter with him.
+              Then one day, Vince asked me to go out. I spent the whole walk over trying to figure out if it was a date or not (spoiler: it was). We ended up at a bar called Bixi, where the lighting was warm, the food was great, and Vince somehow managed to be even smarter and more thoughtful than I already believed he was.
+            </p>
+            <p class="prose" style="font-size: 1.125rem; line-height: 1.7;">
+              I loved how patiently he explained complicated engineering concepts to anyone who needed help in our group Slack channel — he made intimidating things feel simple. And that night at Bixi, he somehow made everything else feel simple, too.
+            </p>
+            <p class="prose" style="font-size: 1.125rem; line-height: 1.7;">
+              And that's how our love story started: with advice columns, too much Slack messaging, and a maybe-date that turned into the best yes of my life.
             </p>
           </div>
         </div>
@@ -750,8 +794,8 @@
   <section class="quiz-section" style="background-image: url('images/background.jpg'); background-size: cover; background-position: center;">
     <div class="w-full min-h-screen flex items-center justify-center px-12 py-12">
       <div class="max-w-7xl w-full">
-        <div class="event-card text-center mb-10 mx-auto" style="max-width: 800px; padding: 2rem; background-color: #FAF8F3;">
-          <h2 class="section-title mb-0">Pop Quiz: How Well Do You Know Us? Tap Card For Answer.</h2>
+        <div class="event-card text-center mb-10 mx-auto quiz-header" style="padding: 2rem; background-color: #FAF8F3;">
+          <h2 class="section-title mb-0"><span style="white-space: nowrap;">Pop Quiz: How Well Do You Know Us?</span><br>Tap Card For Answer.</h2>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
@@ -759,10 +803,10 @@
           <button onclick="toggleFlip(0)" class="trivia-card perspective group fade-in" style="--delay:0s">
             <div class="trivia-inner" style="height: 280px;">
               <div class="trivia-front absolute inset-0 bg-white rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center">
-                <div class="text-2xl font-semibold">How did we meet?</div>
+                <div class="text-2xl font-semibold">Where did we meet?</div>
               </div>
               <div class="trivia-back absolute inset-0 rounded-2xl shadow-lg flex items-center justify-center p-6 rotate-y-180 text-center" style="background-color: #F5EDDC;">
-                <div class="text-2xl font-medium">At a boba shop during a college club event</div>
+                <div class="text-2xl font-medium">Columbia Journalism School</div>
               </div>
             </div>
           </button>
@@ -771,10 +815,10 @@
           <button onclick="toggleFlip(1)" class="trivia-card perspective group fade-in" style="--delay:0.1s">
             <div class="trivia-inner" style="height: 280px;">
               <div class="trivia-front absolute inset-0 bg-white rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center">
-                <div class="text-2xl font-semibold">How long have we known each other?</div>
+                <div class="text-2xl font-semibold">How long have we been dating?</div>
               </div>
               <div class="trivia-back absolute inset-0 rounded-2xl shadow-lg flex items-center justify-center p-6 rotate-y-180 text-center" style="background-color: #F5EDDC;">
-                <div class="text-2xl font-medium">Over 10 years</div>
+                <div class="text-2xl font-medium">More than four years</div>
               </div>
             </div>
           </button>
@@ -783,10 +827,10 @@
           <button onclick="toggleFlip(2)" class="trivia-card perspective group fade-in" style="--delay:0.2s">
             <div class="trivia-inner" style="height: 280px;">
               <div class="trivia-front absolute inset-0 bg-white rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center">
-                <div class="text-2xl font-semibold">Who was in a band?</div>
+                <div class="text-2xl font-semibold">Who is the most beloved member of Tanaz's family?</div>
               </div>
               <div class="trivia-back absolute inset-0 rounded-2xl shadow-lg flex items-center justify-center p-6 rotate-y-180 text-center" style="background-color: #F5EDDC;">
-                <div class="text-2xl font-medium">Vince</div>
+                <div class="text-2xl font-medium">Ziggy</div>
               </div>
             </div>
           </button>
@@ -795,10 +839,10 @@
           <button onclick="toggleFlip(3)" class="trivia-card perspective group fade-in" style="--delay:0.3s">
             <div class="trivia-inner" style="height: 280px;">
               <div class="trivia-front absolute inset-0 bg-white rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center">
-                <div class="text-2xl font-semibold">What did Vince order at the boba shop?</div>
+                <div class="text-2xl font-semibold">Which one of us reads more news?</div>
               </div>
               <div class="trivia-back absolute inset-0 rounded-2xl shadow-lg flex items-center justify-center p-6 rotate-y-180 text-center" style="background-color: #F5EDDC;">
-                <div class="text-2xl font-medium">Two milk teas</div>
+                <div class="text-2xl font-medium">Vince</div>
               </div>
             </div>
           </button>
@@ -807,10 +851,10 @@
           <button onclick="toggleFlip(4)" class="trivia-card perspective group fade-in" style="--delay:0.4s">
             <div class="trivia-inner" style="height: 280px;">
               <div class="trivia-front absolute inset-0 bg-white rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center">
-                <div class="text-2xl font-semibold">Where did they go to college?</div>
+                <div class="text-2xl font-semibold">What's our favorite daily activity to do together?</div>
               </div>
               <div class="trivia-back absolute inset-0 rounded-2xl shadow-lg flex items-center justify-center p-6 rotate-y-180 text-center" style="background-color: #F5EDDC;">
-                <div class="text-2xl font-medium">UC Santa Cruz</div>
+                <div class="text-2xl font-medium">Go on walks</div>
               </div>
             </div>
           </button>
@@ -819,10 +863,10 @@
           <button onclick="toggleFlip(5)" class="trivia-card perspective group fade-in" style="--delay:0.5s">
             <div class="trivia-inner" style="height: 280px;">
               <div class="trivia-front absolute inset-0 bg-white rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center">
-                <div class="text-2xl font-semibold">What year did they start dating?</div>
+                <div class="text-2xl font-semibold">Which one of us said 'I love you' first?</div>
               </div>
               <div class="trivia-back absolute inset-0 rounded-2xl shadow-lg flex items-center justify-center p-6 rotate-y-180 text-center" style="background-color: #F5EDDC;">
-                <div class="text-2xl font-medium">2019</div>
+                <div class="text-2xl font-medium">Tanaz</div>
               </div>
             </div>
           </button>

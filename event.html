@@ -14,7 +14,14 @@
       align-items: center;
       scroll-snap-align: start;
     }
-    
+
+    /* Reduce space under RSVP button on desktop */
+    @media (min-width: 769px) {
+      .rsvp-section.py-20 {
+        padding-bottom: 3rem !important;
+      }
+    }
+
     .carousel-container {
       width: 100%;
       overflow: hidden;
@@ -23,13 +30,7 @@
     
     .carousel-track {
       display: flex;
-      animation: scroll 60s linear infinite;
       will-change: transform;
-    }
-
-    @keyframes scroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(calc(-316px * 17)); }
     }
     
     .carousel-item {
@@ -70,11 +71,6 @@
         height: 350px;
       }
 
-      @keyframes scroll {
-        0% { transform: translateX(0); }
-        100% { transform: translateX(calc(-266px * 17)); }
-      }
-
       /* Reduce section padding slightly on medium screens */
       section[style*="padding-top: 4rem"] {
         padding-top: 3rem !important;
@@ -88,11 +84,6 @@
       }
 
       .nav-link {
-        font-size: 1rem !important;
-      }
-
-      .nav-square {
-        padding: 0.75rem 1.5rem !important;
         font-size: 1rem !important;
       }
 
@@ -159,11 +150,6 @@
         height: 300px;
       }
 
-      @keyframes scroll {
-        0% { transform: translateX(0); }
-        100% { transform: translateX(calc(-236px * 17)); }
-      }
-
       .event-card {
         padding: 1.5rem !important;
       }
@@ -200,11 +186,6 @@
       .carousel-item {
         width: 180px;
         height: 250px;
-      }
-
-      @keyframes scroll {
-        0% { transform: translateX(0); }
-        100% { transform: translateX(calc(-196px * 17)); }
       }
 
       nav .max-w-screen-2xl {
@@ -521,11 +502,6 @@
         height: 200px !important;
       }
 
-      @keyframes scroll {
-        0% { transform: translateX(0); }
-        100% { transform: translateX(calc(-166px * 17)); }
-      }
-
       .faq-grid h4 {
         font-size: 1rem !important;
       }
@@ -561,17 +537,43 @@
     }
 
     document.addEventListener('DOMContentLoaded', function() {
-      // Clone items multiple times for extended seamless loop
       const track = document.querySelector('.carousel-track');
       const items = Array.from(track.querySelectorAll('.carousel-item'));
 
-      // Clone all items 5 times to create a long buffer before loop resets
-      for (let i = 0; i < 5; i++) {
-        items.forEach(item => {
-          const clone = item.cloneNode(true);
-          track.appendChild(clone);
-        });
+      // Clone items once to create seamless loop
+      items.forEach(item => {
+        const clone = item.cloneNode(true);
+        track.appendChild(clone);
+      });
+
+      // Calculate total width of original items
+      let totalWidth = 0;
+      items.forEach(item => {
+        const style = window.getComputedStyle(item);
+        const width = item.offsetWidth;
+        const marginLeft = parseFloat(style.marginLeft);
+        const marginRight = parseFloat(style.marginRight);
+        totalWidth += width + marginLeft + marginRight;
+      });
+
+      // Start position
+      let position = 0;
+      const speed = 0.5; // pixels per frame
+
+      function animate() {
+        position -= speed;
+
+        // Reset position when first set of items is completely off screen
+        if (Math.abs(position) >= totalWidth) {
+          position = 0;
+        }
+
+        track.style.transform = `translateX(${position}px)`;
+        requestAnimationFrame(animate);
       }
+
+      // Start animation
+      animate();
     });
 
     function toggleMobileMenu() {
@@ -652,7 +654,7 @@
   </section>
 
   <!-- SECTION 2: Three Day Event Cards -->
-  <section class="event-section" style="background-color: #F5EDDC; padding-top: 4rem; padding-bottom: 2rem;">
+  <section class="event-section" style="background-color: #E5E1D9; padding-top: 4rem; padding-bottom: 2rem;">
     <div class="w-full max-w-screen-2xl mx-auto px-12">
       <h2 class="section-title text-center mb-12">Three Days of Celebration</h2>
 

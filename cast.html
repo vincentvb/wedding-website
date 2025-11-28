@@ -14,6 +14,13 @@
       align-items: center;
     }
 
+    /* Reduce space under RSVP button on desktop */
+    @media (min-width: 769px) {
+      .rsvp-section.py-20 {
+        padding-bottom: 3rem !important;
+      }
+    }
+
     /* Responsive adjustments for smaller desktop screens */
     @media (max-width: 1440px) {
       nav .max-w-screen-2xl {
@@ -40,11 +47,6 @@
       }
 
       .nav-link {
-        font-size: 1rem !important;
-      }
-
-      .nav-square {
-        padding: 0.75rem 1.5rem !important;
         font-size: 1rem !important;
       }
 
@@ -297,45 +299,61 @@
         padding: 2rem 1.5rem !important;
       }
 
-      /* Cast and Crew Grid - Stack vertically with photos first */
+      /* Cast and Crew Grid - 2 columns side by side on mobile */
       .cast-grid {
-        display: flex !important;
-        flex-direction: column !important;
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
       }
-
-      /* Row 1: Holly photo, Holly text, Justin photo, Justin text */
-      .cast-grid > div:nth-child(1) { order: 1; }  /* Holly photo */
-      .cast-grid > div:nth-child(2) { order: 2; }  /* Holly text */
-      .cast-grid > div:nth-child(3) { order: 3; }  /* Justin photo */
-      .cast-grid > div:nth-child(4) { order: 4; }  /* Justin text */
-
-      /* Row 2: Shirley Liu photo, Shirley Liu text, Shirley Ng photo, Shirley Ng text */
-      .cast-grid > div:nth-child(5) { order: 6; }  /* Shirley Liu text -> move after photo */
-      .cast-grid > div:nth-child(6) { order: 5; }  /* Shirley Liu photo -> move before text */
-      .cast-grid > div:nth-child(7) { order: 8; }  /* Shirley Ng text -> move after photo */
-      .cast-grid > div:nth-child(8) { order: 7; }  /* Shirley Ng photo -> move before text */
-
-      /* Row 3 */
-      .cast-grid > div:nth-child(9) { order: 9; }   /* Photo */
-      .cast-grid > div:nth-child(10) { order: 10; } /* Text */
-      .cast-grid > div:nth-child(11) { order: 11; } /* Photo */
-      .cast-grid > div:nth-child(12) { order: 12; } /* Text */
-
-      /* Row 4 */
-      .cast-grid > div:nth-child(13) { order: 14; } /* Text -> move after photo */
-      .cast-grid > div:nth-child(14) { order: 13; } /* Photo -> move before text */
-      .cast-grid > div:nth-child(15) { order: 16; } /* Text -> move after photo */
-      .cast-grid > div:nth-child(16) { order: 15; } /* Photo -> move before text */
-
-      /* Row 5 */
-      .cast-grid > div:nth-child(17) { order: 17; } /* Photo */
-      .cast-grid > div:nth-child(18) { order: 18; } /* Text */
-      .cast-grid > div:nth-child(19) { order: 19; } /* Photo */
-      .cast-grid > div:nth-child(20) { order: 20; } /* Text */
 
       .cast-grid > div {
         width: 100% !important;
       }
+
+      /* Make photo squares smaller on mobile */
+      .cast-grid .aspect-square {
+        aspect-ratio: 1 / 1;
+      }
+
+      /* Reorder and color: Pink for photos, White for text */
+      /* Row 1: Holly - Photo (1), Text (2) -> Pink, White */
+      .cast-grid > div:nth-child(1) { order: 1; }
+      .cast-grid > div:nth-child(2) { order: 2; }
+
+      /* Row 2: Justin - Photo (3), Text (4) -> White, Pink (swap order) */
+      .cast-grid > div:nth-child(3) { order: 4; }
+      .cast-grid > div:nth-child(4) { order: 3; }
+
+      /* Row 3: Shirley Liu - Text (5), Photo (6) -> Pink, White (swap order) */
+      .cast-grid > div:nth-child(5) { order: 6; }
+      .cast-grid > div:nth-child(6) { order: 5; }
+
+      /* Row 4: Shirley Ng - Text (7), Photo (8) -> White, Pink */
+      .cast-grid > div:nth-child(7) { order: 7; }
+      .cast-grid > div:nth-child(8) { order: 8; }
+
+      /* Row 5: Photo (9), Text (10) -> Pink, White */
+      .cast-grid > div:nth-child(9) { order: 9; }
+      .cast-grid > div:nth-child(10) { order: 10; }
+
+      /* Row 6: Photo (11), Text (12) -> White, Pink (swap) */
+      .cast-grid > div:nth-child(11) { order: 12; }
+      .cast-grid > div:nth-child(12) { order: 11; }
+
+      /* Row 7: Text (13), Photo (14) -> Pink, White (swap) */
+      .cast-grid > div:nth-child(13) { order: 14; }
+      .cast-grid > div:nth-child(14) { order: 13; }
+
+      /* Row 8: Text (15), Photo (16) -> White, Pink */
+      .cast-grid > div:nth-child(15) { order: 15; }
+      .cast-grid > div:nth-child(16) { order: 16; }
+
+      /* Row 9: Photo (17), Text (18) -> Pink, White */
+      .cast-grid > div:nth-child(17) { order: 17; }
+      .cast-grid > div:nth-child(18) { order: 18; }
+
+      /* Row 10: Photo (19), Text (20) -> White, Pink (swap) */
+      .cast-grid > div:nth-child(19) { order: 20; }
+      .cast-grid > div:nth-child(20) { order: 19; }
 
       /* RSVP Section - match home page */
       .rsvp-section {
@@ -500,8 +518,9 @@
         <h2 class="hero-text" style="font-size: 4rem; margin-bottom: 1rem; line-height: 1.1;">Tanaz</h2>
         <h3 class="section-title" style="font-size: 1.5rem; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 2rem; opacity: 1;">THE BRIDE</h3>
         <div class="prose" style="max-width: none;">
-          <p style="margin-bottom: 1.5rem;">A brilliant engineer and the light of Vince's life. When she's not debugging code, she's planning their next adventure or perfecting her chai recipe.</p>
-          <p>Her passion for technology is matched only by her love for exploring new places and creating meaningful experiences with the people she loves.</p>
+          <p style="margin-bottom: 1.5rem;">Tanaz reads a lot — like, "keeps a spreadsheet of every book she's read, how long it took, and her immediate thoughts" a lot. A proud marathon survivor, she also loves running, and one of her favorite parts of the last few years has been watching Vince take up the sport. Sharing something she loves with him has been incredibly special, and their runs together are some of the best parts of her week.</p>
+          <p style="margin-bottom: 1.5rem;">When she's not reading or running, she's usually in the kitchen testing a new recipe or cooking with friends. If she invites you to join, whatever you do, don't ask her to deviate from the recipe. She will not. She cannot.</p>
+          <p>In short, Tanaz is happiest with a book in hand, running shoes nearby, and a kitchen full of people she loves (who are following the recipe exactly).</p>
         </div>
       </div>
     </div>
@@ -517,9 +536,7 @@
         </div>
       </div>
       <div class="bride-groom-section relative overflow-hidden" style="background-color: #E5E1D9; min-height: 600px;">
-        <div class="bride-groom-section relative overflow-hidden" style="background-color: #E5E1D9; min-height: 600px;">
-          <img src="images/vince_toy.JPG" alt="Vince" class="absolute inset-0 w-full h-full object-cover" />
-        </div>
+        <img src="images/vince_toy.JPG" alt="Vince" class="absolute inset-0 w-full h-full object-cover" />
       </div>
     </div>
   </section>
@@ -541,8 +558,8 @@
         </div>
       </div>
       <div class="aspect-square flex flex-col items-center justify-center p-6" style="background-color: #FFFFFF;">
-        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.75rem; font-style: italic; margin-bottom: 0.5rem;">Holly Yu</h3>
-        <p style="font-family: 'Crimson Text', serif; font-size: 0.875rem; text-align: center;">Mother of the bride and pork steamed bun expert</p>
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.75rem; font-style: italic; margin-bottom: 0.5rem;">Dad</h3>
+        <p style="font-family: 'Crimson Text', serif; font-size: 0.875rem; text-align: center;">Father of the bride and guaranteed life of the party</p>
       </div>
       <div class="relative aspect-square overflow-hidden" style="background-color: #E5B4B4;">
         <div class="w-full h-full flex items-center justify-center text-gray-500">
@@ -550,14 +567,14 @@
         </div>
       </div>
       <div class="aspect-square flex flex-col items-center justify-center p-6" style="background-color: #FFFFFF;">
-        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.75rem; font-style: italic; margin-bottom: 0.5rem;">Justin Liu</h3>
-        <p style="font-family: 'Crimson Text', serif; font-size: 0.875rem; text-align: center;">Father of the bride and will beat you at chess</p>
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.75rem; font-style: italic; margin-bottom: 0.5rem;">Mom</h3>
+        <p style="font-family: 'Crimson Text', serif; font-size: 0.875rem; text-align: center;">Mother of the bride and maker of the world's most legendary butter chicken.</p>
       </div>
 
       <!-- Row 2 -->
       <div class="aspect-square flex flex-col items-center justify-center p-6" style="background-color: #FFFFFF;">
-        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.75rem; font-style: italic; margin-bottom: 0.5rem;">Shirley Liu</h3>
-        <p style="font-family: 'Crimson Text', serif; font-size: 0.875rem; text-align: center;">Sister of the bride who will point a vlog camera in your face</p>
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.75rem; font-style: italic; margin-bottom: 0.5rem;">Sister</h3>
+        <p style="font-family: 'Crimson Text', serif; font-size: 0.875rem; text-align: center;">Sister of the bride, ready to crush anyone in a dance-off.</p>
       </div>
       <div class="relative aspect-square overflow-hidden" style="background-color: #E5B4B4;">
         <div class="w-full h-full flex items-center justify-center text-gray-500">
@@ -565,8 +582,8 @@
         </div>
       </div>
       <div class="aspect-square flex flex-col items-center justify-center p-6" style="background-color: #FFFFFF;">
-        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.75rem; font-style: italic; margin-bottom: 0.5rem;">Shirley Ng</h3>
-        <p style="font-family: 'Crimson Text', serif; font-size: 0.875rem; text-align: center;">Sister of the groom and expert in drugs</p>
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.75rem; font-style: italic; margin-bottom: 0.5rem;">Mother-in-law</h3>
+        <p style="font-family: 'Crimson Text', serif; font-size: 0.875rem; text-align: center;">Mother of the groom and proud archivist of Vince's childhood highlights.</p>
       </div>
       <div class="relative aspect-square overflow-hidden" style="background-color: #E5B4B4;">
         <div class="w-full h-full flex items-center justify-center text-gray-500">
@@ -581,8 +598,8 @@
         </div>
       </div>
       <div class="aspect-square flex flex-col items-center justify-center p-6" style="background-color: #FFFFFF;">
-        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.75rem; font-style: italic; margin-bottom: 0.5rem;">Name</h3>
-        <p style="font-family: 'Crimson Text', serif; font-size: 0.875rem; text-align: center;">Description</p>
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.75rem; font-style: italic; margin-bottom: 0.5rem;">Erin</h3>
+        <p style="font-family: 'Crimson Text', serif; font-size: 0.875rem; text-align: center;">Friend and speaker who somehow always gets the skip-the-line copies on Libby.</p>
       </div>
       <div class="relative aspect-square overflow-hidden" style="background-color: #E5B4B4;">
         <div class="w-full h-full flex items-center justify-center text-gray-500">
@@ -590,14 +607,14 @@
         </div>
       </div>
       <div class="aspect-square flex flex-col items-center justify-center p-6" style="background-color: #FFFFFF;">
-        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.75rem; font-style: italic; margin-bottom: 0.5rem;">Name</h3>
-        <p style="font-family: 'Crimson Text', serif; font-size: 0.875rem; text-align: center;">Description</p>
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.75rem; font-style: italic; margin-bottom: 0.5rem;">Mimi</h3>
+        <p style="font-family: 'Crimson Text', serif; font-size: 0.875rem; text-align: center;">Friend and speaker whose spreadsheets could kick your spreadsheets' butts.</p>
       </div>
 
       <!-- Row 4 -->
       <div class="aspect-square flex flex-col items-center justify-center p-6" style="background-color: #FFFFFF;">
-        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.75rem; font-style: italic; margin-bottom: 0.5rem;">Name</h3>
-        <p style="font-family: 'Crimson Text', serif; font-size: 0.875rem; text-align: center;">Description</p>
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.75rem; font-style: italic; margin-bottom: 0.5rem;">Alex</h3>
+        <p style="font-family: 'Crimson Text', serif; font-size: 0.875rem; text-align: center;">Cousin, speaker, and keeper of all Vince's secrets.</p>
       </div>
       <div class="relative aspect-square overflow-hidden" style="background-color: #E5B4B4;">
         <div class="w-full h-full flex items-center justify-center text-gray-500">
@@ -605,35 +622,14 @@
         </div>
       </div>
       <div class="aspect-square flex flex-col items-center justify-center p-6" style="background-color: #FFFFFF;">
-        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.75rem; font-style: italic; margin-bottom: 0.5rem;">Name</h3>
-        <p style="font-family: 'Crimson Text', serif; font-size: 0.875rem; text-align: center;">Description</p>
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.75rem; font-style: italic; margin-bottom: 0.5rem;">Mario</h3>
+        <p style="font-family: 'Crimson Text', serif; font-size: 0.875rem; text-align: center;">Friend, speaker, and social butterfly who will absolutely introduce himself at the wedding</p>
       </div>
       <div class="relative aspect-square overflow-hidden" style="background-color: #E5B4B4;">
         <div class="w-full h-full flex items-center justify-center text-gray-500">
           <span>Photo Placeholder</span>
         </div>
       </div>
-
-      <!-- Row 5 -->
-      <div class="relative aspect-square overflow-hidden" style="background-color: #E5B4B4;">
-        <div class="w-full h-full flex items-center justify-center text-gray-500">
-          <span>Photo Placeholder</span>
-        </div>
-      </div>
-      <div class="aspect-square flex flex-col items-center justify-center p-6" style="background-color: #FFFFFF;">
-        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.75rem; font-style: italic; margin-bottom: 0.5rem;">Name</h3>
-        <p style="font-family: 'Crimson Text', serif; font-size: 0.875rem; text-align: center;">Description</p>
-      </div>
-      <div class="relative aspect-square overflow-hidden" style="background-color: #E5B4B4;">
-        <div class="w-full h-full flex items-center justify-center text-gray-500">
-          <span>Photo Placeholder</span>
-        </div>
-      </div>
-      <div class="aspect-square flex flex-col items-center justify-center p-6" style="background-color: #FFFFFF;">
-        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.75rem; font-style: italic; margin-bottom: 0.5rem;">Name</h3>
-        <p style="font-family: 'Crimson Text', serif; font-size: 0.875rem; text-align: center;">Description</p>
-      </div>
-    </div>
   </section>
 
   <!-- RSVP Section -->
