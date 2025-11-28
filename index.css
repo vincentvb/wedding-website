@@ -245,13 +245,17 @@ h1, h2, h3, h4, h5, h6 {
   .hero-text {
     font-size: 2rem;
   }
-  
+
   .hero-subtext {
     font-size: 1.25rem;
   }
-  
+
   .nav-link {
     font-size: 1rem;
+  }
+
+  .trivia-inner {
+    height: 120px !important;
   }
 }
   
