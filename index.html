@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tanaz & Vince - Wedding</title>
+  <link rel="preload" as="image" href="images/side.jpg" fetchpriority="high">
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="index.css">
@@ -709,8 +710,17 @@
   <section class="full-screen hero-section" style="background-color: #E5E1D9;">
     <div class="w-full h-screen flex">
       <!-- Left Column: Full-height Photo -->
-      <div class="w-1/2 h-full relative">
-        <img src="images/side.jpg" alt="Tanaz & Vince" class="w-full h-full object-cover">
+      <div class="w-1/2 h-full relative" style="background-color: #d4cfc7;">
+        <img
+          src="images/side.jpg"
+          alt="Tanaz & Vince"
+          class="w-full h-full object-cover"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+          onload="this.style.opacity='1'"
+          style="opacity: 0; transition: opacity 0.3s ease-in-out;"
+        >
       </div>
       <!-- Right Column: Text with Navigation -->
       <div class="w-1/2 h-full flex flex-col">
