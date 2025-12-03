@@ -567,10 +567,14 @@
 
       // Start position
       let position = 0;
-      const speed = 0.5; // pixels per frame
+      const speed = 30; // pixels per second
+      let lastTime = performance.now();
 
-      function animate() {
-        position -= speed;
+      function animate(currentTime) {
+        const deltaTime = (currentTime - lastTime) / 1000; // convert to seconds
+        lastTime = currentTime;
+
+        position -= speed * deltaTime;
 
         // Reset position when first set of items is completely off screen
         if (Math.abs(position) >= totalWidth) {
@@ -582,7 +586,7 @@
       }
 
       // Start animation
-      animate();
+      requestAnimationFrame(animate);
     });
 
     function toggleMobileMenu() {
