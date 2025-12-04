@@ -29,9 +29,10 @@
       align-items: flex-start !important;
     }
 
-    /* Pop Quiz card height */
+    /* Pop Quiz card height - auto like FAQ cards */
     .quiz-section .trivia-inner {
-      height: 280px;
+      height: auto;
+      min-height: 150px;
     }
 
     /* Remove full-screen behavior from quiz section */
@@ -583,6 +584,12 @@
         font-size: 0.75rem !important;
       }
 
+      /* Larger RSVP button at bottom of page */
+      .rsvp-section .nav-square {
+        padding: 0.75rem 1.75rem !important;
+        font-size: 1rem !important;
+      }
+
       .hero-text-custom {
         font-size: 2rem !important;
       }
@@ -658,7 +665,8 @@
 
     @media (max-width: 1024px) and (min-width: 769px) {
       .quiz-section .trivia-inner {
-        height: 240px !important;
+        height: auto !important;
+        min-height: 140px;
       }
 
       .quiz-section .trivia-card .text-2xl {
@@ -760,19 +768,13 @@
             <h3 class="section-title mb-6" style="font-size: clamp(1.5rem, 2.5vw, 2rem);">Tanaz's Version</h3>
           <div class="space-y-4 mb-6">
             <p class="prose" style="font-size: 1.125rem; line-height: 1.7;">
-              We met at Columbia Journalism School, thrown into a group project that had something to do with advice columns. While other teams were busy being serious reporters, we were knee-deep in strangers' relationship problems. I'd read them aloud to Vince just to see what he'd say, pretending it was "research," when really I just liked hearing how his mind worked.
+              In my first memory of Vince, I see him sitting on the steps in front of Columbia Journalism School with a few of our classmates, suggesting that we all go play ping pong together. I remember thinking he was sweet. We didn't talk much in the first few weeks, but eventually we were assigned to a group project that had something to do with advice columns. And while we waited for our third teammate, whose poor attendance at group meetings was critical to our love story, to show up to the coffee shop or join the Zoom, I would read the columns aloud to Vince and ask him how he would handle this situation or that quandary. I loved hearing how his mind worked.
             </p>
             <p class="prose" style="font-size: 1.125rem; line-height: 1.7;">
-              Before long, we were constantly sending each other messages on Slack. We'd be typing away during classes, until eventually the people around us started noticing just how much we were "collaborating."
+              I quickly learned that he was patient, thoughtful, and smart. Anytime someone in our cohort had a question or needed homework help, he was always the first in the Slack channel to volunteer, and I loved how clearly he explained complex problems. It took longer to learn that he pours a lot of himself into whatever he's working on, he is unyielding and disciplined about achieving his goals, and his optimism is unflinching, regardless of circumstance. The more I learned, the more I loved.
             </p>
             <p class="prose" style="font-size: 1.125rem; line-height: 1.7;">
-              Then one day, Vince asked me to go out. I spent the whole walk over trying to figure out if it was a date or not (spoiler: it was). We ended up at a bar called Bixi, where the lighting was warm, the food was great, and Vince somehow managed to be even smarter and more thoughtful than I already believed he was.
-            </p>
-            <p class="prose" style="font-size: 1.125rem; line-height: 1.7;">
-              I loved how patiently he explained complicated engineering concepts to anyone who needed help in our group Slack channel — he made intimidating things feel simple. And that night at Bixi, he somehow made everything else feel simple, too.
-            </p>
-            <p class="prose" style="font-size: 1.125rem; line-height: 1.7;">
-              And that's how our love story started: with advice columns, too much Slack messaging, and a maybe-date that turned into the best yes of my life.
+              Then one day, Vince asked me to go out. I thought it might be a date, but I wasn't sure (spoiler: it was). We went to a bar called Bixi and talked for hours. I don't remember what we chatted about or what happened in the days that followed, but I remember feeling giddy and so happy on my walk home that night.
             </p>
           </div>
         </div>
@@ -815,7 +817,7 @@
           <!-- Card 0 -->
           <button onclick="toggleFlip(0)" class="trivia-card perspective group fade-in" style="--delay:0s">
             <div class="trivia-inner">
-              <div class="trivia-front absolute inset-0 bg-white rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center">
+              <div class="trivia-front absolute inset-0 rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center" style="background-color: #FAF8F3;">
                 <div class="text-2xl font-semibold">Where did we meet?</div>
               </div>
               <div class="trivia-back absolute inset-0 rounded-2xl shadow-lg flex items-center justify-center p-6 rotate-y-180 text-center" style="background-color: #F5EDDC;">
@@ -827,7 +829,7 @@
           <!-- Card 1 -->
           <button onclick="toggleFlip(1)" class="trivia-card perspective group fade-in" style="--delay:0.1s">
             <div class="trivia-inner">
-              <div class="trivia-front absolute inset-0 bg-white rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center">
+              <div class="trivia-front absolute inset-0 rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center" style="background-color: #FAF8F3;">
                 <div class="text-2xl font-semibold">How long have we been dating?</div>
               </div>
               <div class="trivia-back absolute inset-0 rounded-2xl shadow-lg flex items-center justify-center p-6 rotate-y-180 text-center" style="background-color: #F5EDDC;">
@@ -839,7 +841,7 @@
           <!-- Card 2 -->
           <button onclick="toggleFlip(2)" class="trivia-card perspective group fade-in" style="--delay:0.2s">
             <div class="trivia-inner">
-              <div class="trivia-front absolute inset-0 bg-white rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center">
+              <div class="trivia-front absolute inset-0 rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center" style="background-color: #FAF8F3;">
                 <div class="text-2xl font-semibold">Who is the most beloved member of Tanaz's family?</div>
               </div>
               <div class="trivia-back absolute inset-0 rounded-2xl shadow-lg flex items-center justify-center p-6 rotate-y-180 text-center" style="background-color: #F5EDDC;">
@@ -851,7 +853,7 @@
           <!-- Card 3 -->
           <button onclick="toggleFlip(3)" class="trivia-card perspective group fade-in" style="--delay:0.3s">
             <div class="trivia-inner">
-              <div class="trivia-front absolute inset-0 bg-white rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center">
+              <div class="trivia-front absolute inset-0 rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center" style="background-color: #FAF8F3;">
                 <div class="text-2xl font-semibold">Which one of us reads more news?</div>
               </div>
               <div class="trivia-back absolute inset-0 rounded-2xl shadow-lg flex items-center justify-center p-6 rotate-y-180 text-center" style="background-color: #F5EDDC;">
@@ -863,7 +865,7 @@
           <!-- Card 4 -->
           <button onclick="toggleFlip(4)" class="trivia-card perspective group fade-in" style="--delay:0.4s">
             <div class="trivia-inner">
-              <div class="trivia-front absolute inset-0 bg-white rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center">
+              <div class="trivia-front absolute inset-0 rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center" style="background-color: #FAF8F3;">
                 <div class="text-2xl font-semibold">What's our favorite daily activity to do together?</div>
               </div>
               <div class="trivia-back absolute inset-0 rounded-2xl shadow-lg flex items-center justify-center p-6 rotate-y-180 text-center" style="background-color: #F5EDDC;">
@@ -875,7 +877,7 @@
           <!-- Card 5 -->
           <button onclick="toggleFlip(5)" class="trivia-card perspective group fade-in" style="--delay:0.5s">
             <div class="trivia-inner">
-              <div class="trivia-front absolute inset-0 bg-white rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center">
+              <div class="trivia-front absolute inset-0 rounded-2xl shadow-lg flex flex-col items-center justify-center p-6 text-center" style="background-color: #FAF8F3;">
                 <div class="text-2xl font-semibold">Which one of us said 'I love you' first?</div>
               </div>
               <div class="trivia-back absolute inset-0 rounded-2xl shadow-lg flex items-center justify-center p-6 rotate-y-180 text-center" style="background-color: #F5EDDC;">

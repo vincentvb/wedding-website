@@ -193,10 +193,14 @@
         grid-template-columns: 1fr !important;
       }
 
-      /* Remove extra padding from eat & drink wrapper on mobile */
-      .max-w-screen-2xl.px-12.mt-16 {
-        padding-left: 0 !important;
-        padding-right: 0 !important;
+      /* Reduce padding on travel card containers for mobile */
+      .max-w-screen-2xl.px-12 {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+      }
+
+      /* Eat & drink wrapper on mobile */
+      .mt-16 {
         margin-top: 2rem !important;
       }
 
@@ -256,6 +260,12 @@
 
       .rsvp-section .text-center.mt-12 {
         padding-bottom: 1rem !important;
+      }
+
+      /* Larger RSVP button at bottom of page - match home page */
+      .rsvp-section .nav-square {
+        padding: 0.75rem 1.75rem !important;
+        font-size: 1rem !important;
       }
     }
   </style>
@@ -377,7 +387,7 @@
         </div>
 
         <!-- Eat & Drink and Things to Do Section -->
-        <div class="max-w-screen-2xl mx-auto px-12 mt-16">
+        <div class="mt-16">
           <div class="eat-drink-grid grid grid-cols-1 md:grid-cols-2 gap-8">
             <!-- Eat & Drink -->
             <div class="event-card" style="background-color: #FAF8F3;">
