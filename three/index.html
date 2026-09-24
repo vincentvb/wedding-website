@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Wait... Three?</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg?v=2">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&family=Indie+Flower&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sage:#F6EDC9;
+    --sage-deep:#71915F;
+    --cream:#FFFFFF;
+    --rose:#D2825E;
+    --rose-deep:#B2643F;
+    --gold:#D9B65C;
+    --ink:#2E2A26;
+    --ink-soft:#635C53;
+    --line: rgba(46,42,38,0.14);
+    --shadow: 0 12px 32px rgba(46,42,38,0.10);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;overflow-x:hidden;}
+  body{
+    background:var(--sage);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+  }
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background-image:
+      radial-gradient(circle at 20% 20%, rgba(113,145,95,0.10) 0, transparent 40%),
+      radial-gradient(circle at 85% 75%, rgba(232,167,160,0.16) 0, transparent 45%);
+    pointer-events:none;
+    z-index:0;
+  }
+  .page{
+    display:none;
+    position:relative;
+    z-index:1;
+    min-height:100vh;
+    padding:64px 24px 80px;
+    animation: fadeIn 0.5s ease;
+  }
+  .page.active{display:flex; flex-direction:column; align-items:center;}
+  #page-password.active{ justify-content:center; }
+  #page-thankyou{ padding-bottom:0; min-height:0; }
+  #page-wedding{ padding-bottom:24px; }
+  #page-baby{ padding-bottom:50px; }
+  @keyframes fadeIn{ from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
+
+  h1,h2,h3{ font-family:'Fraunces', serif; font-weight:600; margin:0; color:var(--ink); }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--sage-deep); font-weight:600; margin-bottom:10px;
+  }
+  .ribbon{
+    display:flex; align-items:center; gap:14px;
+    width:100%; max-width:560px; margin:36px auto 28px;
+  }
+  .ribbon::before, .ribbon::after{
+    content:""; flex:1; height:1px;
+    background: repeating-linear-gradient(90deg, var(--line) 0 6px, transparent 6px 12px);
+  }
+  .ribbon span{
+    font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.14em;
+    text-transform:uppercase; color:var(--ink-soft); white-space:nowrap;
+  }
+
+  .container{ width:100%; max-width:760px; text-align:center; position:relative; z-index:1; }
+  #page-wedding .container{ max-width:1500px; }
+  #page-thankyou .container{ max-width:1400px; }
+  #page-baby .container{ max-width:1100px; }
+  .btn{
+    font-family:'Work Sans', sans-serif; font-weight:600; font-size:15.5px;
+    border:none; cursor:pointer; border-radius:999px;
+    padding:16px 30px; display:inline-flex; align-items:center; gap:10px;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    box-shadow:var(--shadow);
+  }
+  .btn:hover{ transform:translateY(-2px); }
+  .btn:active{ transform:translateY(0px) scale(0.98); }
+  .btn:focus-visible{ outline:3px solid var(--gold); outline-offset:3px; }
+  .btn-primary{ background:var(--rose); color:#fff; }
+  .btn-primary:hover{ background:var(--rose-deep); }
+  .btn-secondary{ background:var(--sage-deep); color:#fff; }
+  .btn-secondary:hover{ background:#67805c; }
+  .btn-ghost{
+    background:transparent; color:var(--ink); border:1.5px solid var(--line);
+    box-shadow:none; padding:13px 26px;
+  }
+  .btn-ghost:hover{ border-color:var(--ink-soft); }
+  .btn-back{
+    position:fixed; top:24px; left:24px; z-index:5;
+    background:var(--cream); border:1px solid var(--line);
+    box-shadow:var(--shadow); font-size:14px; padding:10px 18px;
+  }
+
+  /* ---------- LANDING ---------- */
+  #page-landing .container{ max-width:600px; }
+  .seal{
+    width:88px; height:88px; border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, var(--gold), #b6892e 78%);
+    display:flex; align-items:center; justify-content:center;
+    font-size:34px; margin:0 auto 28px; box-shadow:var(--shadow);
+    border:3px solid var(--cream);
+  }
+  .landing-title{ font-size:clamp(34px,6vw,56px); line-height:1.05; }
+  .landing-sub{ color:var(--ink-soft); font-size:17px; margin-top:16px; max-width:440px; margin-left:auto; margin-right:auto; }
+  .terracotta-pill{
+    display:inline-block; background:var(--rose); color:#fff;
+    font-weight:600; font-size:20px; padding:6px 20px; border-radius:999px; margin-bottom:6px;
+  }
+  .landing-buttons{ display:flex; flex-direction:column; gap:16px; margin-top:44px; align-items:center; }
+  .landing-buttons .btn{ width:100%; max-width:420px; justify-content:center; text-align:center; font-size:16px; }
+
+  /* ---------- DOORS ---------- */
+  .doors{
+    display:flex; gap:26px; justify-content:center; align-items:flex-end;
+    margin-top:52px; flex-wrap:wrap;
+  }
+  .door{
+    background:none; border:none; cursor:pointer; padding:0;
+    display:flex; flex-direction:column; align-items:center; gap:14px;
+    font-family:inherit; transition:transform 0.2s ease;
+  }
+  .door:hover{ transform:translateY(-4px); }
+  .door:focus-visible{ outline:3px solid var(--gold); outline-offset:4px; border-radius:12px; }
+  .door-graphic{ display:block; filter:drop-shadow(0 10px 20px rgba(46,42,38,0.18)); }
+  .door-graphic svg{ display:block; }
+  .door:nth-child(1) .door-graphic svg{ width:140px; height:auto; }
+  .door:nth-child(2) .door-graphic svg{ width:200px; height:auto; }
+  .door:nth-child(3) .door-graphic svg{ width:140px; height:auto; }
+  .door-number{
+    font-family:'Fraunces', serif; font-weight:700; font-size:28px; color:var(--ink);
+    background:var(--cream); width:52px; height:52px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; box-shadow:var(--shadow);
+    transition:opacity 0.2s ease;
+  }
+  .door-graphic{ position:relative; transition:opacity 0.2s ease; }
+  .door-check{
+    display:none;
+    position:absolute; top:-8px; right:-8px;
+    width:30px; height:30px; border-radius:50%;
+    background:var(--sage-deep); color:#fff; border:3px solid var(--cream);
+    align-items:center; justify-content:center;
+    font-size:15px; font-weight:700; box-shadow:var(--shadow);
+    z-index:3;
+  }
+  .door.visited .door-graphic{ opacity:0.55; }
+  .door.visited .door-number{ opacity:0.55; }
+  .door.visited .door-check{ display:flex; }
+  .doors-hint{
+    font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--ink-soft);
+    margin-top:26px; letter-spacing:0.02em; min-height:18px;
+  }
+  @media (max-width:480px){
+    .doors{ flex-direction:column; align-items:center; gap:36px; }
+    .door:nth-child(1) .door-graphic svg{ width:170px; }
+    .door:nth-child(2) .door-graphic svg{ width:230px; }
+    .door:nth-child(3) .door-graphic svg{ width:170px; }
+    #page-landing .container{ display:flex; flex-direction:column; }
+    #page-landing .landing-title{ order:0; }
+    #page-landing .doors-hint{ order:1; margin-top:32px; margin-bottom:32px; }
+    #page-landing .doors{ order:2; margin-top:0; }
+  }
+
+  /* ---------- WEDDING GALLERY ---------- */
+  .gallery-title{ font-size:clamp(28px,5vw,42px); }
+  .wedding-video{
+    width:75vw; max-width:1100px; aspect-ratio:16/9; margin:32px auto 0;
+    border-radius:16px; overflow:hidden; box-shadow:var(--shadow);
+  }
+  .wedding-video iframe{ width:100%; height:100%; border:0; display:block; }
+  @media (max-width:520px){ .wedding-video{ width:100%; } }
+  .event-section{ margin-top:48px; text-align:center; }
+  .event-heading{
+    font-family:'Fraunces', serif; font-weight:600; font-size:26px;
+    text-align:center; margin:0 0 16px; color:#fff;
+    background:var(--sage-deep); display:block;
+    width:100vw; margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw);
+    padding:16px 0;
+  }
+  .event-photo-grid{
+    display:grid; grid-template-columns:repeat(4, 1fr);
+    gap:16px; width:100%; max-width:1450px; margin:0 auto;
+  }
+  @media (max-width:600px){
+    .event-photo-grid{ grid-template-columns:repeat(2, 1fr); }
+  }
+  .grid{
+    display:grid; grid-template-columns:repeat(3, 1fr);
+    gap:20px; width:100%; max-width:700px; margin:32px auto 0;
+  }
+  .photo-placeholder{
+    aspect-ratio:4/5; border-radius:16px; box-shadow:var(--shadow);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:8px; color:#fff; font-family:'IBM Plex Mono', monospace; font-size:12px;
+    text-align:center; padding:16px; letter-spacing:0.02em;
+  }
+  .ph1{background:linear-gradient(150deg,#D2825E,#a15c3c);}
+  .ph2{background:linear-gradient(150deg,#7C9473,#5c7053);}
+  .ph3{background:linear-gradient(150deg,#D9B65C,#a9843f);}
+  .ph4{background:linear-gradient(150deg,#a7b8e8,#6f7fb3);}
+  .ph5{background:linear-gradient(150deg,#c8a7e8,#8b6fb3);}
+  .ph6{background:linear-gradient(150deg,#e8c1a7,#b38a6f);}
+  .photo-placeholder .icon{ font-size:26px; }
+
+  /* ---------- BABY REVEAL ---------- */
+  #confetti-canvas{ position:fixed; inset:0; pointer-events:none; z-index:4; }
+  .reveal-title{ font-size:clamp(32px,6vw,50px); }
+  .reveal-row{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:24px;
+    justify-content:center; align-items:stretch; margin:30px auto 0;
+    width:65vw; max-width:1400px;
+  }
+  /* Shared rule: every box in this row is FORCED to be the exact same
+     shape (width from its grid cell, height from aspect-ratio) no matter
+     what. overflow:hidden means content can never grow the box itself —
+     if something doesn't fit, it clips instead of breaking the layout. */
+  .reveal-row > *{
+    width:100%; max-width:400px; aspect-ratio:5/4; box-sizing:border-box;
+    border-radius:20px; box-shadow:var(--shadow); border:1px solid var(--line);
+    overflow:hidden; display:flex; align-items:center; justify-content:center;
+  }
+  .reveal-box{
+    background:var(--gold);
+    flex-direction:column; gap:8px; text-align:center; padding:0 16px;
+    container-type:inline-size;
+  }
+  .reveal-prefix{
+    font-family:'IBM Plex Mono', monospace; font-size:7cqw; letter-spacing:0.14em;
+    text-transform:uppercase; font-weight:600; color:rgba(46,42,38,0.65);
+  }
+  .scramble-word{
+    display:inline-block;
+    font-family:'Fraunces', serif; font-weight:700; font-size:18cqw;
+    color:var(--sage-deep);
+  }
+  .scramble-word.decoding{
+    color:var(--rose-deep);
+  }
+  .due-card{
+    background:var(--cream);
+    padding:6%; flex-direction:column;
+    container-type:inline-size;
+  }
+  .due-label{ font-family:'IBM Plex Mono', monospace; font-size:6cqw; letter-spacing:0.12em; text-transform:uppercase; color:var(--sage-deep); font-weight:600;}
+  .calendar{
+    position:relative;
+    width:75%; margin:3.75cqw auto 0; border-radius:14px; overflow:hidden;
+    box-shadow:0 8px 18px rgba(46,42,38,0.16); border:1px solid var(--line);
+    background:#fff;
+  }
+  .calendar::before, .calendar::after{
+    content:""; position:absolute; top:-6px; width:12px; height:16px;
+    background:var(--cream); border:2px solid var(--line); border-radius:3px; z-index:2;
+  }
+  .calendar::before{ left:18%; }
+  .calendar::after{ right:18%; }
+  .calendar-header{
+    background:var(--rose); color:#fff; font-family:'IBM Plex Mono', monospace;
+    font-weight:600; letter-spacing:0.1em; font-size:5.1cqw; text-align:center;
+    padding:3.2cqw 0 2.6cqw; text-transform:uppercase;
+  }
+  .calendar-day{
+    font-family:'Fraunces', serif; font-weight:700; font-size:23.8cqw; line-height:1;
+    text-align:center; padding:4.9cqw 0 1.9cqw; color:var(--ink);
+  }
+  .calendar-weekday{
+    font-family:'IBM Plex Mono', monospace; font-size:3.75cqw; letter-spacing:0.08em;
+    text-transform:uppercase; text-align:center; color:var(--ink-soft); padding-bottom:4.3cqw;
+  }
+  .due-date-full{ font-family:'Fraunces', serif; font-size:17px; margin-top:16px; color:var(--ink); }
+  .countdown{ font-family:'IBM Plex Mono', monospace; font-size:5.5cqw; color:var(--ink-soft); margin-top:1.6cqw; }
+  .ultrasound{
+    margin:0;
+    background:radial-gradient(circle at 50% 45%, #cfd7ea 0%, #7c88a8 55%, #3f4660 100%);
+    flex-direction:column; gap:6px;
+    color:#fff; font-family:'IBM Plex Mono', monospace; font-size:12px; text-align:center; padding:20px;
+  }
+  .then-now{ display:flex; gap:24px; justify-content:center; margin-top:16px; flex-wrap:wrap; }
+  .then-now .photo-placeholder{ width:230px; aspect-ratio:1/1; }
+
+  .banner-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:0;
+    width:100vw; max-width:100vw;
+    margin:28px calc(50% - 50vw) 0;
+  }
+  .banner-grid .photo-placeholder{ aspect-ratio:1/1; border-radius:0; box-shadow:none; }
+  .banner-grid-4{ grid-template-columns:repeat(4,1fr); }
+  @media (max-width:480px){
+    .banner-grid-4{ grid-template-columns:repeat(2,1fr); }
+  }
+
+  .section-title{ font-size:26px; margin-top:16px; }
+  .section-note{ color:var(--ink-soft); font-size:14.5px; margin-top:6px; max-width:420px; }
+  .future-kids{
+    display:grid; grid-template-columns:repeat(2, auto); gap:8px;
+    justify-content:center; width:fit-content; margin:22px auto 0;
+  }
+  .kid-card{
+    width:100%;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .kid-card .avatar{
+    width:300px; height:220px; border-radius:20px;
+    display:flex; align-items:center; justify-content:center; font-size:58px;
+    overflow:hidden; box-shadow:var(--shadow);
+  }
+  .kid-card .avatar img{
+    width:100%; height:100%; object-fit:cover; display:block;
+  }
+  .kid1 .avatar{background:#ecd0c0;}
+  .kid2 .avatar{background:#dbe6d6;}
+  .kid3 .avatar{background:#F6EDC9;}
+  .kid4 .avatar{background:#d7e3f0;}
+
+  .cta-row{ display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-top:18px; }
+
+  /* ---------- SUBPAGES (form/list) ---------- */
+  .subpage-card{
+    background:var(--cream); border-radius:22px; box-shadow:var(--shadow);
+    padding:38px 32px; width:100%; max-width:520px; border:1px solid var(--line);
+    text-align:left; position:relative; z-index:1; margin:0 auto;
+  }
+  .subpage-card h2{ text-align:center; font-size:26px; }
+  .subpage-card .lead{ text-align:center; color:var(--ink-soft); font-size:14.5px; margin-top:8px; }
+  label{ font-size:13px; font-weight:600; display:block; margin:18px 0 6px; }
+  input[type=text], input[type=email], input[type=tel], textarea{
+    width:100%; padding:12px 14px; border-radius:10px; border:1.5px solid var(--line);
+    font-family:'Work Sans', sans-serif; font-size:14.5px; background:#fff; color:var(--ink);
+  }
+  input:focus, textarea:focus{ outline:none; border-color:var(--sage-deep); }
+  textarea{ resize:vertical; min-height:90px; }
+  .form-submit{ width:100%; justify-content:center; margin-top:22px; }
+  .password-row{ display:flex; gap:10px; align-items:stretch; margin-left:auto; margin-right:auto; }
+  .password-row input{ flex:1; min-width:0; }
+  .password-row .btn{ white-space:nowrap; padding:12px 22px; box-shadow:none; }
+  .thankyou{ text-align:center; padding:20px 0; }
+  .thankyou .big{ font-size:40px; margin-bottom:10px; }
+  .status-note{ font-size:12.5px; color:var(--sage-deep); margin-top:10px; text-align:center; min-height:16px; }
+
+  @media (max-width:520px){
+    .page{ padding:60px 16px 70px; }
+    #page-thankyou{ padding-bottom:0; }
+    #page-wedding{ padding-bottom:20px; }
+    #page-baby{ padding-bottom:45px; }
+    .subpage-card{ padding:28px 20px; }
+    .grid{ gap:10px; }
+    .reveal-row{ grid-template-columns:1fr; width:100%; justify-items:center; }
+    .reveal-box, .due-card, .ultrasound{ width:100%; max-width:320px; }
+    .reveal-prefix{ font-size:17px; }
+    .scramble-word{ font-size:52px; }
+    .kid-card .avatar{ width:100%; height:124px; }
+    .future-kids{ width:100%; max-width:340px; grid-template-columns:repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="confetti-canvas"></canvas>
+
+<!-- ============= PASSWORD GATE ============= -->
+<div class="page active" id="page-password">
+  <div class="container">
+    <div class="subpage-card" style="text-align:center; max-width:420px;">
+      <div class="seal" style="margin-bottom:20px;">🔒</div>
+      <h2 id="password-heading">This page is just for us</h2>
+      <p class="lead">Please check your card for the password.</p>
+      <div class="password-row" id="password-row" style="margin-top:14px;">
+        <input type="password" id="site-password" placeholder="Enter password" style="padding-left:10px;" onkeydown="if(event.key==='Enter') checkPassword()">
+        <button class="btn btn-primary" onclick="checkPassword()">Enter</button>
+      </div>
+      <div class="status-note" id="password-status"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============= LANDING ============= -->
+<div class="page" id="page-landing">
+  <div class="container">
+    <h1 class="landing-title">Pick a door. Then pick another.</h1>
+    <div class="doors">
+      <button class="door" id="door-1" onclick="openDoor(1, 'page-thankyou')" aria-label="Door 1">
+        <span class="door-graphic">
+          <svg viewBox="0 0 140 240" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="g1" x1="0" y1="0" x2="140" y2="240" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#D2825E"/><stop offset="1" stop-color="#B2643F"/></linearGradient></defs>
+            <rect x="6" y="6" width="128" height="228" rx="10" fill="url(#g1)" stroke="#FFFFFF" stroke-width="6"/>
+            <rect x="22" y="24" width="96" height="80" rx="6" fill="rgba(255,255,255,0.16)" stroke="rgba(255,255,255,0.4)" stroke-width="3"/>
+            <rect x="22" y="118" width="96" height="90" rx="6" fill="rgba(255,255,255,0.16)" stroke="rgba(255,255,255,0.4)" stroke-width="3"/>
+            <circle cx="112" cy="128" r="6" fill="#FFFFFF"/>
+          </svg>
+          <span class="door-check">✓</span>
+        </span>
+        <span class="door-number">1</span>
+      </button>
+      <button class="door" id="door-2" onclick="openDoor(2, 'page-wedding')" aria-label="Door 2">
+        <span class="door-graphic">
+          <svg viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="g2" x1="0" y1="0" x2="200" y2="220" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#7C9473"/><stop offset="1" stop-color="#567a46"/></linearGradient></defs>
+            <rect x="0" y="14" width="200" height="14" rx="6" fill="#FFFFFF"/>
+            <circle cx="20" cy="21" r="6" fill="#567a46"/>
+            <circle cx="180" cy="21" r="6" fill="#567a46"/>
+            <rect x="6" y="30" width="188" height="184" rx="6" fill="url(#g2)" stroke="#FFFFFF" stroke-width="6"/>
+            <line x1="44" y1="30" x2="44" y2="214" stroke="rgba(0,0,0,0.15)" stroke-width="3"/>
+            <line x1="82" y1="30" x2="82" y2="214" stroke="rgba(0,0,0,0.15)" stroke-width="3"/>
+            <line x1="120" y1="30" x2="120" y2="214" stroke="rgba(0,0,0,0.15)" stroke-width="3"/>
+            <line x1="158" y1="30" x2="158" y2="214" stroke="rgba(0,0,0,0.15)" stroke-width="3"/>
+            <line x1="14" y1="40" x2="186" y2="204" stroke="rgba(0,0,0,0.22)" stroke-width="9"/>
+            <line x1="186" y1="40" x2="14" y2="204" stroke="rgba(0,0,0,0.22)" stroke-width="9"/>
+            <rect x="170" y="108" width="8" height="30" rx="4" fill="#FFFFFF"/>
+          </svg>
+          <span class="door-check">✓</span>
+        </span>
+        <span class="door-number">2</span>
+      </button>
+      <button class="door" id="door-3" onclick="openDoor(3, null)" aria-label="Door 3">
+        <span class="door-graphic">
+          <svg viewBox="0 0 140 240" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="g3" x1="0" y1="0" x2="140" y2="240" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#D9B65C"/><stop offset="1" stop-color="#b6892e"/></linearGradient></defs>
+            <ellipse cx="70" cy="120" rx="58" ry="108" fill="url(#g3)" stroke="#FFFFFF" stroke-width="6"/>
+            <circle cx="104" cy="120" r="6" fill="#FFFFFF"/>
+          </svg>
+          <span class="door-check">✓</span>
+        </span>
+        <span class="door-number">3</span>
+      </button>
+    </div>
+    <p class="doors-hint" id="doors-hint"></p>
+  </div>
+</div>
+
+<!-- ============= THANK YOU ============= -->
+<div class="page" id="page-thankyou">
+  <button class="btn btn-ghost btn-back" onclick="showPage('page-landing')">← Back to the doors</button>
+  <div class="container">
+    <h1 class="landing-title" style="font-size:clamp(32px,6vw,48px);">Thank You</h1>
+    <div class="banner-grid banner-grid-4">
+      <img src="images/banner-1.jpg" alt="" style="width:100%;height:100%;aspect-ratio:1/1;object-fit:cover;display:block;">
+      <img src="images/banner-2.jpg" alt="" style="width:100%;height:100%;aspect-ratio:1/1;object-fit:cover;display:block;">
+      <img src="images/banner-3.jpg" alt="" style="width:100%;height:100%;aspect-ratio:1/1;object-fit:cover;display:block;">
+      <img src="images/banner-4.jpg" alt="" style="width:100%;height:100%;aspect-ratio:1/1;object-fit:cover;display:block;">
+    </div>
+    <p class="landing-sub" style="width:75vw; max-width:1100px; font-size:22px;">
+      To everyone who showed up and made our wedding so fun and special: thank you so much.
+      Looking at each detail in the photos reminds us of how much time and effort our friends
+      and family put into helping us build our dream wedding. We're extremely grateful for everyone who
+      spent hours practicing dances, the loved ones who weighed in on centerpieces, color
+      palettes, and outfits, and the guests who traveled from all over the country (and the
+      world) to celebrate with us. We say this to each other all the time, but we are truly the
+      luckiest kids alive &mdash; and it's because we have all of you.
+    </p>
+    <p class="landing-sub" style="width:75vw; max-width:1100px; font-size:22px;"><span class="terracotta-pill">All our love,</span><br>Tanaz and Vince</p>
+    <div class="banner-grid banner-grid-4">
+      <img src="images/banner-5.jpg" alt="" style="width:100%;height:100%;aspect-ratio:1/1;object-fit:cover;display:block;">
+      <img src="images/banner-6.jpg" alt="" style="width:100%;height:100%;aspect-ratio:1/1;object-fit:cover;display:block;">
+      <img src="images/banner-7.jpg" alt="" style="width:100%;height:100%;aspect-ratio:1/1;object-fit:cover;display:block;">
+      <img src="images/banner-8.jpg" alt="" style="width:100%;height:100%;aspect-ratio:1/1;object-fit:cover;display:block;">
+    </div>
+  </div>
+</div>
+
+<!-- ============= WEDDING GALLERY ============= -->
+<div class="page" id="page-wedding">
+  <button class="btn btn-ghost btn-back" onclick="showPage('page-landing')">← Back to the doors</button>
+  <div class="container">
+    <h2 class="gallery-title">Wedding Memories</h2>
+    <p class="landing-sub" style="width:75vw; max-width:1100px; font-size:22px;">A few of our favorites + the <a id="drive-link-inline" href="#" target="_blank" rel="noopener" style="color:var(--sage-deep); text-decoration:underline; font-weight:600;">professional gallery</a> as well as <a id="friends-family-link-inline" href="#" target="_blank" rel="noopener" style="color:var(--sage-deep); text-decoration:underline; font-weight:600;">photos taken by friends and family</a> for anyone who wants to see more.</p>
+    <div class="wedding-video" id="wedding-video" hidden></div>
+    <div id="wedding-events-container"></div>
+    <p style="margin-top:20px; font-size:20px;">See the <a id="drive-link" href="#" target="_blank" rel="noopener" style="color:var(--sage-deep); text-decoration:underline; font-weight:600;">professional gallery</a> and <a id="friends-family-link" href="#" target="_blank" rel="noopener" style="color:var(--sage-deep); text-decoration:underline; font-weight:600;">photos taken by friends and family</a></p>
+  </div>
+</div>
+
+<!-- ============= BABY REVEAL ============= -->
+<div class="page" id="page-baby">
+  <button class="btn btn-ghost btn-back" onclick="showPage('page-landing')">← Back to the doors</button>
+  <div class="container">
+    <h2 class="reveal-title">Yes, we are three now! 🎉</h2>
+
+    <div class="reveal-row">
+      <div class="due-card">
+        <div class="due-label">Due date</div>
+        <div class="calendar">
+          <div class="calendar-header" id="due-month">Month</div>
+          <div class="calendar-day" id="due-day">00</div>
+          <div class="calendar-weekday" id="due-weekday">Weekday</div>
+        </div>
+        <div class="countdown" id="countdown-display"></div>
+      </div>
+
+      <div class="reveal-box"><span class="reveal-prefix">It's a</span><span class="scramble-word" id="gender-word">baby</span></div>
+
+      <div class="ultrasound">🩶 Add ultrasound photo here</div>
+    </div>
+
+    <div class="ribbon"><span>A Very Serious Preview</span></div>
+    <h3 class="section-title">Meet our (AI&ndash;generated) future kids</h3>
+    <div class="future-kids">
+      <div class="kid-card kid1"><div class="avatar"><img src="images/kid1.jpg" alt=""></div></div>
+      <div class="kid-card kid2"><div class="avatar"><img src="images/kid2.jpg" alt=""></div></div>
+      <div class="kid-card kid3"><div class="avatar"><img src="images/kid3.jpg" alt=""></div></div>
+      <div class="kid-card kid4"><div class="avatar"><img src="images/kid4.jpg" alt=""></div></div>
+    </div>
+
+    <div class="ribbon"><span>Be Part Of It</span></div>
+    <h3 class="section-title" style="max-width:400px; margin-left:auto; margin-right:auto;">Want us to keep you in the loop on milestones?</h3>
+    <div class="cta-row">
+      <button class="btn" onclick="showPage('page-updates')" style="font-size:20px; padding:6px 20px; background:var(--gold); color:#fff; text-decoration:underline;">Stay updated on baby news</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============= STAY UPDATED ============= -->
+<div class="page" id="page-updates">
+  <button class="btn btn-ghost btn-back" onclick="showPage('page-baby')">← Back</button>
+  <div class="container">
+    <div class="subpage-card">
+      <h2>Stay updated 💌</h2>
+      <p class="lead">We'll keep you in the loop as the countdown continues.</p>
+      <div id="updates-form">
+        <label for="upd-name">Your name</label>
+        <input type="text" id="upd-name" placeholder="First and Last Name">
+        <button class="btn btn-primary form-submit" onclick="submitUpdate()">Keep me posted</button>
+        <div class="status-note" id="updates-status"></div>
+      </div>
+      <div id="updates-thanks" class="thankyou" style="display:none;">
+        <div class="big">🎉</div>
+        <h3>You're on the list!</h3>
+        <p class="lead">We'll be in touch the second there's news.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ============ EDIT THESE ============
+  const DUE_DATE = "2027-01-20"; // YYYY-MM-DD — change to your real due date
+  const SITE_PASSWORD = "ziggy"; // change to whatever password you want to share
+  // Google Apps Script web app URL for baby-news signups (see three/signups-apps-script.gs).
+  const SIGNUPS_URL = "https://script.google.com/macros/s/AKfycbxU6jM70yO8fNpuJIDtUvJ3ZtSepT1y-0QukQCznw5i6igeenBpDb36dAcCjyxU7pi1/exec";
+  const GOOGLE_DRIVE_URL = "https://photos.app.goo.gl/mkCMKcMKcb2pBUzv7"; // paste your shared full-gallery folder link here
+  const FRIENDS_FAMILY_URL = "https://photos.app.goo.gl/g1q9tBYgoFUwbxXS9"; // paste your friends & family photos folder link here
+  const WEDDING_VIDEO_ID = "OIo4tdI5xRI"; // YouTube video ID — the part after "v=" or "youtu.be/" in the link
+  // =====================================
+
+  document.getElementById('drive-link').href = GOOGLE_DRIVE_URL;
+  document.getElementById('drive-link-inline').href = GOOGLE_DRIVE_URL;
+  document.getElementById('friends-family-link').href = FRIENDS_FAMILY_URL;
+  document.getElementById('friends-family-link-inline').href = FRIENDS_FAMILY_URL;
+
+  if(WEDDING_VIDEO_ID){
+    const video = document.getElementById('wedding-video');
+    video.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${WEDDING_VIDEO_ID}?rel=0" title="Our wedding video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`;
+    video.hidden = false;
+  }
+
+  const WEDDING_EVENTS = ['Holi', 'Nikkah', 'Welcome Party', 'Haldi', 'Sangeet', 'First Look', 'Ceremony and Cocktail Hour', 'Reception'];
+
+  // As you send more event photos, add them here — filenames should live in the images/ folder.
+  const EVENT_PHOTOS = {
+    'Holi': Array.from({length: 20}, (_, i) => `images/holi-${i+1}.jpg`),
+    'Nikkah': Array.from({length: 20}, (_, i) => `images/nikkah-${i+1}.jpg`),
+    'Welcome Party': Array.from({length: 20}, (_, i) => `images/welcome-${i+1}.jpg`),
+    'Haldi': Array.from({length: 20}, (_, i) => `images/haldi-${i+1}.jpg`),
+    'Sangeet': Array.from({length: 20}, (_, i) => `images/sangeet-${i+1}.jpg`),
+    'First Look': Array.from({length: 20}, (_, i) => `images/first-look-${i+1}.jpg`),
+    'Ceremony and Cocktail Hour': Array.from({length: 20}, (_, i) => `images/ceremony-cocktail-${i+1}.jpg`),
+    'Reception': Array.from({length: 20}, (_, i) => `images/reception-${i+1}.jpg`)
+  };
+
+  function renderWeddingEvents(){
+    const container = document.getElementById('wedding-events-container');
+    const colorClasses = ['ph1','ph2','ph3','ph4','ph5','ph6'];
+    let html = '';
+    WEDDING_EVENTS.forEach(eventName => {
+      html += `<div class="event-section"><h3 class="event-heading">${eventName}</h3><div class="event-photo-grid">`;
+      const photos = EVENT_PHOTOS[eventName];
+      if(photos){
+        photos.forEach(src => {
+          html += `<img src="${src}" alt="" style="width:100%;height:100%;aspect-ratio:1/1;object-fit:cover;border-radius:16px;box-shadow:var(--shadow);display:block;">`;
+        });
+      } else {
+        for(let i = 0; i < 20; i++){
+          html += `<div class="photo-placeholder ${colorClasses[i % colorClasses.length]}"><span class="icon">📸</span>Add photo</div>`;
+        }
+      }
+      html += `</div></div>`;
+    });
+    container.innerHTML = html;
+  }
+  renderWeddingEvents();
+
+  function matchPasswordRowWidth(){
+    const heading = document.getElementById('password-heading');
+    const row = document.getElementById('password-row');
+    if(!heading || !row) return;
+    const w = heading.offsetWidth;
+    if(w > 0) row.style.maxWidth = w + 'px';
+  }
+  matchPasswordRowWidth();
+  if(document.fonts && document.fonts.ready){
+    document.fonts.ready.then(matchPasswordRowWidth);
+  }
+  window.addEventListener('resize', matchPasswordRowWidth);
+
+  function checkPassword(){
+    const input = document.getElementById('site-password');
+    const status = document.getElementById('password-status');
+    if(input.value.trim().toLowerCase() === SITE_PASSWORD.toLowerCase()){
+      try{ sessionStorage.setItem('three-authenticated', 'true'); }catch(e){}
+      showPage('page-landing');
+      status.textContent = '';
+    } else {
+      status.textContent = "That's not quite it — try again.";
+      input.value = '';
+      input.focus();
+    }
+  }
+
+  const visitedDoors = new Set();
+
+  function showPage(id){
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    window.scrollTo({top:0, behavior:'smooth'});
+    if(id === 'page-landing'){ updateDoorsHint(); }
+  }
+
+  function openDoor(num, pageId){
+    visitedDoors.add(num);
+    const doorEl = document.getElementById('door-' + num);
+    if(doorEl) doorEl.classList.add('visited');
+    if(num === 3){
+      openReveal();
+    } else {
+      showPage(pageId);
+    }
+  }
+
+  function updateDoorsHint(){
+    const hint = document.getElementById('doors-hint');
+    if(!hint) return;
+    const remaining = 3 - visitedDoors.size;
+    if(visitedDoors.size === 0){
+      hint.textContent = '';
+    } else if(remaining === 0){
+      hint.textContent = "You've opened them all! 🎉";
+    } else {
+      hint.textContent = remaining === 1 ? 'One more door to go.' : `${remaining} more doors to go.`;
+    }
+  }
+
+  function openReveal(){
+    showPage('page-baby');
+    fireConfetti();
+    triggerScrambleWord('gender-word', 'baby', 3200);
+  }
+
+  // ---------- scramble-in text reveal ----------
+  function triggerScrambleWord(id, finalText, totalMs, lockOrder){
+    const el = document.getElementById(id);
+    if(!el) return;
+    totalMs = totalMs || 3200;
+    const chars = 'abcdefghijklmnopqrstuvwxyz';
+    const len = finalText.length;
+    lockOrder = lockOrder && lockOrder.length === len ? lockOrder : Array.from({length: len}, (_, i) => i);
+    const rank = new Array(len);
+    lockOrder.forEach((letterIndex, order) => { rank[letterIndex] = order; });
+    let locked = new Array(len).fill(false);
+    let startTime = null;
+    el.classList.add('decoding');
+    function frame(ts){
+      if(!startTime) startTime = ts;
+      const elapsed = ts - startTime;
+      let out = '';
+      for(let i = 0; i < len; i++){
+        const lockTime = ((rank[i] + 1) / len) * totalMs * 0.85;
+        if(elapsed >= lockTime) locked[i] = true;
+        out += locked[i] ? finalText[i] : chars[Math.floor(Math.random() * chars.length)];
+      }
+      el.textContent = out;
+      if(elapsed < totalMs){
+        requestAnimationFrame(frame);
+      } else {
+        el.textContent = finalText;
+        el.classList.remove('decoding');
+      }
+    }
+    requestAnimationFrame(frame);
+  }
+
+  // ---------- due date + countdown ----------
+  function formatDueDate(){
+    const d = new Date(DUE_DATE + "T00:00:00");
+    document.getElementById('due-month').textContent = d.toLocaleDateString('en-US', { month:'long' });
+    document.getElementById('due-day').textContent = d.getDate();
+    document.getElementById('due-weekday').textContent = d.toLocaleDateString('en-US', { weekday:'long' });
+    const today = new Date();
+    const diffDays = Math.ceil((d - today) / (1000*60*60*24));
+    const countdownEl = document.getElementById('countdown-display');
+    if(diffDays > 0){
+      countdownEl.textContent = `${diffDays} day${diffDays===1?'':'s'} to go`;
+    } else if(diffDays === 0){
+      countdownEl.textContent = `Today's the day!`;
+    } else {
+      countdownEl.textContent = `Already here!`;
+    }
+  }
+  formatDueDate();
+
+  // ---------- confetti ----------
+  function fireConfetti(){
+    const canvas = document.getElementById('confetti-canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const colors = ['#D2825E','#7C9473','#D9B65C','#a7b8e8','#c8a7e8'];
+    let pieces = Array.from({length:280}, () => ({
+      x: Math.random()*canvas.width,
+      y: -20 - Math.random()*canvas.height*1.4,
+      r: 4 + Math.random()*6,
+      c: colors[Math.floor(Math.random()*colors.length)],
+      vy: 2 + Math.random()*3.5,
+      vx: -2 + Math.random()*4,
+      rot: Math.random()*360,
+      vrot: -7 + Math.random()*14
+    }));
+    let frame = 0;
+    function tick(){
+      frame++;
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      pieces.forEach(p => {
+        p.x += p.vx; p.y += p.vy; p.rot += p.vrot;
+        ctx.save();
+        ctx.translate(p.x,p.y);
+        ctx.rotate(p.rot*Math.PI/180);
+        ctx.fillStyle = p.c;
+        ctx.fillRect(-p.r/2,-p.r/2,p.r,p.r*0.6);
+        ctx.restore();
+      });
+      if(frame < 240) requestAnimationFrame(tick);
+      else ctx.clearRect(0,0,canvas.width,canvas.height);
+    }
+    tick();
+  }
+
+  // ---------- storage helpers ----------
+  async function addSignup(name){
+    try{
+      // text/plain avoids a CORS preflight, which Apps Script doesn't support
+      const res = await fetch(SIGNUPS_URL, {
+        method:'POST',
+        headers:{ 'Content-Type':'text/plain;charset=utf-8' },
+        body: JSON.stringify({ name })
+      });
+      const data = await res.json();
+      return !!data.ok;
+    }catch(e){
+      return false;
+    }
+  }
+
+  // ---------- stay updated ----------
+  async function submitUpdate(){
+    const name = document.getElementById('upd-name').value.trim();
+    const status = document.getElementById('updates-status');
+    if(!name){
+      status.textContent = "Please add your name.";
+      return;
+    }
+    status.textContent = "Saving...";
+    const ok = await addSignup(name);
+    if(ok){
+      document.getElementById('updates-form').style.display = 'none';
+      document.getElementById('updates-thanks').style.display = 'block';
+    } else {
+      status.textContent = "Something went wrong — please try again.";
+    }
+  }
+
+  // Skip the password gate on refresh if it was already entered this session
+  try{
+    if(sessionStorage.getItem('three-authenticated') === 'true') showPage('page-landing');
+  }catch(e){}
+</script>
+</body>
+</html>
