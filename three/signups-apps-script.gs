@@ -4,12 +4,15 @@
 // 1. Create a Google Sheet, then Extensions → Apps Script, and paste this file in.
 // 2. Deploy → New deployment → Web app. Execute as: Me. Who has access: Anyone.
 // 3. Copy the web app URL into SIGNUPS_URL in three/index.html.
-// Sign-ups appear as rows (name, timestamp) in the sheet.
+// Sign-ups appear as rows (name, timestamp, phone) in the sheet.
 
 function doPost(e) {
-  const name = String(JSON.parse(e.postData.contents).name || '').trim().slice(0, 200);
+  const data = JSON.parse(e.postData.contents);
+  const name = String(data.name || '').trim().slice(0, 200);
+  const phone = String(data.phone || '').trim().slice(0, 50);
   if (!name) return json({ ok: false });
-  SpreadsheetApp.getActiveSpreadsheet().getSheets()[0].appendRow([name, new Date()]);
+  // Leading apostrophe keeps Sheets from treating the number as a formula or math
+  SpreadsheetApp.getActiveSpreadsheet().getSheets()[0].appendRow([name, new Date(), phone ? "'" + phone : '']);
   return json({ ok: true });
 }
 
