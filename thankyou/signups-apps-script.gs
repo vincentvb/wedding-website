@@ -1,9 +1,9 @@
-// Backend for the "Stay updated on baby news" form on tanazandvince.com/three.
+// Backend for the "Stay updated on baby news" form on tanazandvince.com/thankyou.
 //
 // Setup (one time):
 // 1. Create a Google Sheet, then Extensions → Apps Script, and paste this file in.
 // 2. Deploy → New deployment → Web app. Execute as: Me. Who has access: Anyone.
-// 3. Copy the web app URL into SIGNUPS_URL in three/index.html.
+// 3. Copy the web app URL into SIGNUPS_URL in thankyou/index.html.
 // Sign-ups appear as rows (name, timestamp, phone) in the sheet.
 
 function doPost(e) {
