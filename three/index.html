@@ -174,15 +174,17 @@
   /* ---------- WEDDING GALLERY ---------- */
   .gallery-title{ font-size:clamp(28px,5vw,42px); }
   .wedding-video{
+    position:relative;
     width:75vw; max-width:1100px; aspect-ratio:16/9; margin:32px auto 0;
     border-radius:16px; overflow:hidden; box-shadow:var(--shadow);
   }
   .wedding-video iframe{ width:100%; height:100%; border:0; display:block; }
-  /* Our own sharp cover image; YouTube's player often shows a low-res thumbnail */
+  /* Our own sharp cover image laid over the YouTube player (whose thumbnail is often low-res).
+     Taps pass straight through to the player so iPhones start playback on the first tap. */
   .video-cover{
-    position:relative; width:100%; height:100%; padding:0; border:0;
-    background:#000; cursor:pointer; display:block;
+    position:absolute; inset:0; background:#000; pointer-events:none;
   }
+  .video-cover.clickable{ pointer-events:auto; cursor:pointer; }
   .video-cover img{ width:100%; height:100%; object-fit:cover; display:block; transition:filter 0.25s ease; }
   .video-cover .play-btn{
     position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
@@ -192,9 +194,8 @@
     transition:transform 0.2s ease, background 0.2s ease;
   }
   .video-cover .play-btn svg{ width:34px; height:34px; margin-left:5px; fill:#fff; }
-  .video-cover:hover img{ filter:brightness(0.92); }
-  .video-cover:hover .play-btn{ background:var(--rose-deep); transform:translate(-50%,-50%) scale(1.06); }
-  .video-cover:focus-visible{ outline:3px solid var(--gold); outline-offset:3px; }
+  .wedding-video:hover .video-cover img{ filter:brightness(0.92); }
+  .wedding-video:hover .video-cover .play-btn{ background:var(--rose-deep); transform:translate(-50%,-50%) scale(1.06); }
   @media (max-width:520px){
     .video-cover .play-btn{ width:64px; height:64px; }
     .video-cover .play-btn svg{ width:26px; height:26px; margin-left:4px; }
@@ -556,7 +557,6 @@
     <h2 class="gallery-title">Wedding Memories</h2>
     <div class="wedding-video" id="wedding-video" hidden></div>
     <div id="wedding-events-container"></div>
-    <p style="margin-top:20px; font-size:20px;">See the <a id="drive-link" href="#" target="_blank" rel="noopener" style="color:var(--sage-deep); text-decoration:underline; font-weight:600;">professional gallery</a> and <a id="friends-family-link" href="#" target="_blank" rel="noopener" style="color:var(--sage-deep); text-decoration:underline; font-weight:600;">photos taken by friends and family</a></p>
   </div>
 </div>
 
@@ -628,27 +628,47 @@
   const SITE_PASSWORD = "ziggy"; // change to whatever password you want to share
   // Google Apps Script web app URL for baby-news signups (see three/signups-apps-script.gs).
   const SIGNUPS_URL = "https://script.google.com/macros/s/AKfycbxU6jM70yO8fNpuJIDtUvJ3ZtSepT1y-0QukQCznw5i6igeenBpDb36dAcCjyxU7pi1/exec";
-  const GOOGLE_DRIVE_URL = "https://photos.app.goo.gl/mkCMKcMKcb2pBUzv7"; // paste your shared full-gallery folder link here
-  const FRIENDS_FAMILY_URL = "https://photos.app.goo.gl/g1q9tBYgoFUwbxXS9"; // paste your friends & family photos folder link here
   const WEDDING_VIDEO_ID = "6gWAn666YnU"; // YouTube video ID — the part after "v=" or "youtu.be/" in the link
   // =====================================
 
-  document.getElementById('drive-link').href = GOOGLE_DRIVE_URL;
-  document.getElementById('friends-family-link').href = FRIENDS_FAMILY_URL;
-
   if(WEDDING_VIDEO_ID){
     const video = document.getElementById('wedding-video');
-    // Show a sharp cover image first; the YouTube player only loads once someone clicks play.
+    // The YouTube player loads underneath a sharp cover image. Taps pass through the cover
+    // to the player itself (iPhones only allow playback with sound from a direct tap),
+    // and the cover is removed as soon as the video starts.
     // Falls back to YouTube's smaller thumbnail if the HD one doesn't exist.
-    video.innerHTML = `<button class="video-cover" aria-label="Play our wedding video">
-      <img src="https://i.ytimg.com/vi/${WEDDING_VIDEO_ID}/maxresdefault.jpg" alt=""
-        onerror="this.onerror=null; this.src='https://i.ytimg.com/vi/${WEDDING_VIDEO_ID}/hqdefault.jpg'">
-      <span class="play-btn"><svg viewBox="0 0 24 24"><path d="M6 4l15 8-15 8z"/></svg></span>
-    </button>`;
-    video.querySelector('.video-cover').addEventListener('click', () => {
-      video.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${WEDDING_VIDEO_ID}?rel=0&autoplay=1&playsinline=1" title="Our wedding video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`;
-    });
+    video.innerHTML = `<div id="wedding-video-player"></div>
+      <div class="video-cover" aria-hidden="true">
+        <img src="https://i.ytimg.com/vi/${WEDDING_VIDEO_ID}/maxresdefault.jpg" alt=""
+          onerror="this.onerror=null; this.src='https://i.ytimg.com/vi/${WEDDING_VIDEO_ID}/hqdefault.jpg'">
+        <span class="play-btn"><svg viewBox="0 0 24 24"><path d="M6 4l15 8-15 8z"/></svg></span>
+      </div>`;
     video.hidden = false;
+    const cover = video.querySelector('.video-cover');
+
+    window.onYouTubeIframeAPIReady = () => {
+      new YT.Player('wedding-video-player', {
+        host: 'https://www.youtube-nocookie.com',
+        videoId: WEDDING_VIDEO_ID,
+        width: '100%', height: '100%',
+        playerVars: { rel: 0, playsinline: 1 },
+        events: {
+          onStateChange: e => {
+            if(e.data === YT.PlayerState.PLAYING || e.data === YT.PlayerState.BUFFERING) cover.remove();
+          }
+        }
+      });
+    };
+    const api = document.createElement('script');
+    api.src = 'https://www.youtube.com/iframe_api';
+    // If YouTube's player script can't load, clicking the cover loads a plain embed instead
+    api.onerror = () => {
+      cover.classList.add('clickable');
+      cover.addEventListener('click', () => {
+        video.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${WEDDING_VIDEO_ID}?rel=0&autoplay=1&playsinline=1" title="Our wedding video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`;
+      });
+    };
+    document.head.appendChild(api);
   }
 
   const WEDDING_EVENTS = ['Holi', 'Nikkah', 'Welcome Party', 'Haldi', 'Sangeet', 'First Look', 'Ceremony and Cocktail Hour', 'Reception'];
