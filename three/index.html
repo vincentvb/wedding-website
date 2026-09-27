@@ -533,7 +533,6 @@
   <button class="btn btn-ghost btn-back" onclick="showPage('page-landing')">← Back to the doors</button>
   <div class="container">
     <h2 class="gallery-title">Wedding Memories</h2>
-    <p class="landing-sub" style="width:75vw; max-width:1100px; font-size:22px;">A few of our favorites + the <a id="drive-link-inline" href="#" target="_blank" rel="noopener" style="color:var(--sage-deep); text-decoration:underline; font-weight:600;">professional gallery</a> as well as <a id="friends-family-link-inline" href="#" target="_blank" rel="noopener" style="color:var(--sage-deep); text-decoration:underline; font-weight:600;">photos taken by friends and family</a> for anyone who wants to see more.</p>
     <div class="wedding-video" id="wedding-video" hidden></div>
     <div id="wedding-events-container"></div>
     <p style="margin-top:20px; font-size:20px;">See the <a id="drive-link" href="#" target="_blank" rel="noopener" style="color:var(--sage-deep); text-decoration:underline; font-weight:600;">professional gallery</a> and <a id="friends-family-link" href="#" target="_blank" rel="noopener" style="color:var(--sage-deep); text-decoration:underline; font-weight:600;">photos taken by friends and family</a></p>
@@ -614,9 +613,7 @@
   // =====================================
 
   document.getElementById('drive-link').href = GOOGLE_DRIVE_URL;
-  document.getElementById('drive-link-inline').href = GOOGLE_DRIVE_URL;
   document.getElementById('friends-family-link').href = FRIENDS_FAMILY_URL;
-  document.getElementById('friends-family-link-inline').href = FRIENDS_FAMILY_URL;
 
   if(WEDDING_VIDEO_ID){
     const video = document.getElementById('wedding-video');
